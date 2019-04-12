@@ -36,7 +36,7 @@ state={
     var fd= new FormData();
       fd.append("group_id", this.props.group_id);
       console.log(this.props.group_id);
-    var resp=await fetch("https://alarmaproj2.herokuapp.com/getUsers.php", {
+    var resp=await fetch("https://alarmapracticum.herokuapp.com/getUsers.php", {
       method:"POST",
       body:fd
     });
@@ -80,7 +80,7 @@ state={
       fd.append("group_id", this.props.group_id);
     
     var resp=await
-    fetch("https://alarmaproj2.herokuapp.com/getGroupName.php", {
+    fetch("https://alarmapracticum.herokuapp.com/getGroupName.php", {
       method:"POST",
       body:fd
     });

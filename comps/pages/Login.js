@@ -23,7 +23,7 @@ class Login extends React.Component {
     var fd= new FormData();
       fd.append("email", this.email);
       fd.append("password", this.password);
-    var resp=await fetch("https://alarmaproj2.herokuapp.com/login.php", {
+    var resp=await fetch("https://alarmapracticum.herokuapp.com/login.php", {
       method:"POST",
       body:fd
     });
