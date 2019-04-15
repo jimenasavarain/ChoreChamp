@@ -66,25 +66,28 @@ class CTask extends React.Component {
     return (
         
       <View style={styles.container}>
+            <LinearGradient   colors={['#01061C', '#38385E']}
+          style={{width:420, height:'100%', alignItems: 'center'}}>
         <View style={styles.containerTop}>
-          <Text>Create Task</Text>
+           <Text style={styles.title}>Create Task</Text>
         </View>
         
         <KeyboardAvoidingView style={styles.KeyboardView} 
            behavior="padding" enabled>
                       <ScrollView > 
         <View style={styles.middleContainer}>
-          <Text>Title</Text>
+          <Text style={styles.textLabel}>Title</Text>
 
-          <TextInput autoCapitalize="sentences" autoCorrect={true} underlineColorAndroid='transparent'
-          onChangeText={(text) => this.task_title=text}
+          <TextInput
+            style={styles.titleInp}
+            autoCapitalize="sentences" autoCorrect={true} underlineColorAndroid='transparent'
+            onChangeText={(text) => this.task_title=text}
 
           />
-          <Text>Due Date</Text>
+          <Text style={styles.textLabel}>Due Date</Text>
 
         <DatePicker
-            style={{width: 300, marginTop:15,marginBottom:5          
-                   }}
+            style={styles.datePicker}
             date={this.state.date}
             mode="date"
             placeholder="select date"
@@ -110,16 +113,17 @@ class CTask extends React.Component {
         }}
         onDateChange={(date) => {this.setState({date: date})}}
       />
-          <Text>Description</Text>
+          <Text style={styles.textLabel}>Description</Text>
 
           <TextInput autoCapitalize="sentences" autoCorrect={true} underlineColorAndroid='transparent'
+            style={styles.decInput}
             onChangeText={(text) => this.task_description=text}
-              multiline = {true}
-              maxLength={255}
-              numberOfLines ={6}
+            multiline = {true}
+            maxLength={255}
+            numberOfLines ={6}
           />
    
-    <Text>Score</Text>
+    <Text style={styles.textLabel}>Points</Text>
        <Rating
            type="custom"
            ratingColor='#F1CA02'
@@ -129,17 +133,19 @@ class CTask extends React.Component {
             imageSize={35}
             onFinishRating={this.ratingCompleted}
             onStartRating={this.ratingStarted}
-            style={{ paddingVertical: 10 }}
+            style={styles.rating}
           /> 
 
           <TouchableOpacity 
+            style={styles.cTaskButt}   
             onPress={this.handleProfile}>
-          <Text>Create Task</Text>
+          <Text style={styles.cTaskTxt}>Create Task</Text>
           </TouchableOpacity>
       
         </View>
             </ScrollView>
             </KeyboardAvoidingView>
+            </LinearGradient>
       </View>
 
     );;
@@ -150,10 +156,19 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignSelf: 'stretch',
-    backgroundColor: '#fff',
+    backgroundColor: 'blue',
     alignItems: 'center',
   },
-  
+
+//Main Header of the page    
+title: {
+    color: 'white',
+    top:'30%',
+    fontSize: 30,
+    textAlign: 'center',
+    //fontFamily: 'Raleway-Regular',
+    //fontFamily: 'NunitoSans-Regular',
+  }, 
   containerTop: {
     marginTop:0,
     backgroundColor: '#49CBC6',
@@ -164,21 +179,101 @@ const styles = StyleSheet.create({
     
   KeyboardView: {
     position:'absolute',
-    width:'300%',
-    bottom:20,
     flex:1,
-    marginBottom: 30,
+    top: '15%',
     alignItems: 'center',
     justifyContent: 'space-between',
    // backgroundColor:'red',
-    zIndex:-1,
+    zIndex:1,
     height:'70%',
   },
     
   middleContainer: {
-   marginTop: 5,
+   flex: 1,
    alignItems: 'center',
   },
+
+ datePicker: {
+    width: 300, 
+    marginTop:15,
+    marginBottom:5, 
+    backgroundColor:'white',
+    borderColor: 'yellow',
+    backgroundColor:'white',
+    borderRadius: 6,
+    borderWidth: 2,
+},
+textLabel: {
+    color: '#49CBC6',
+    fontSize: 20,
+    textAlign: 'left',
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignSelf: 'stretch',
+    marginTop: 10,
+    marginBottom: -5,
+    //fontFamily: 'Raleway-Regular',
+   // fontFamily: 'NunitoSans-Regular',
+  },
+titleInp: {
+    color: '#4d4d4d',
+    fontSize: 15,
+    height: 50,
+    width: 300,
+    borderWidth: 2,
+    marginTop: 10,
+    borderColor: 'yellow',
+    backgroundColor:'white',
+    padding: 10,
+    borderRadius: 6,
+    textAlign: 'left',
+    //fontFamily: 'Raleway-Regular',
+  },
+decInput: {
+    color: '#4d4d4d',
+    fontSize: 15,
+    height: 100,
+    width: 300,
+    borderWidth: 2,
+    marginTop: 10,
+    borderColor: 'yellow',
+    backgroundColor:'white',
+    padding: 10,
+    borderRadius: 6,
+    //fontFamily: 'NunitoSans-Regular',
+  },
+rating: {
+    marginTop:10,
+    marginBottom:10,
+    paddingVertical: 10,
+    paddingTop:3,
+    borderColor: 'yellow',
+    backgroundColor:'white',
+    borderRadius: 6,
+    borderWidth: 2,
+    width:'100%',
+    alignItems: 'center',
+    },
+    
+cTaskButt: {
+    marginTop:10,
+    alignItems: 'center',
+    padding: 5,
+    paddingTop: 17,
+    borderRadius: 7,
+    backgroundColor: '#49CBC6',
+    width:300,
+    height:60,
+     },
+    
+cTaskTxt: {
+    fontSize: 20,
+    color: 'white',
+    //fontFamily: 'NunitoSans-Regular',
+  },
+
+   
+    
 });
 
 function mapStateToProps(state){
