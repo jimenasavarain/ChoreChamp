@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Button, Alert, Link, Image, TouchableOpacity, T
 import {Camera, Constants, Permissions, Location, ImagePicker, MapView, LinearGradient, Font} from 'expo';
 import LottieView from 'lottie-react-native';
 //https://www.npmjs.com/package/react-native-dialogbox
+import Nav from '../Nav'
 
 import {connect} from 'react-redux';
 import {ChangePage, ChangePasscode, ChangeUserId} from '../../redux/actions';
@@ -392,6 +393,7 @@ handleOpacity=()=>{
               <Text style={styles.locationText}>Current Address: {this.state.address}</Text>
             </View>
             </LinearGradient>
+            <Nav/>
       </View>
     );
   }
