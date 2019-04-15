@@ -2,6 +2,8 @@ import React from 'react';
 import { StyleSheet, Text, View, Button, Alert, Link, Image, TouchableOpacity, TouchableHighlight, TextInput, ScrollView, } from 'react-native';
 import {Constants, Permissions, LinearGradient, Font} from 'expo';
 //https://www.npmjs.com/package/react-native-dialogbox
+import Nav from "../Nav";
+
 
 import {connect} from 'react-redux';
 import {ChangePage, ChangePasscode, ChangeUserId} from '../../redux/actions';
@@ -130,10 +132,12 @@ sortByScore=(a, b)=>{
         
         return (
             <View>
+                
             <TouchableOpacity onPress={() => this.handleOnPress(index)}>
               <View>
-                <Text>{(obj.score)? obj.score : 0}</Text>
-                <Text>{"  "}{obj.username}</Text>
+                <Text style={styles.textLabel}>{(obj.score)? obj.score : 0}</Text>
+                  
+                <Text style={styles.textLabel}>{"  "}{obj.username}</Text>
               </View>
             </TouchableOpacity>
             </View>
@@ -143,21 +147,26 @@ sortByScore=(a, b)=>{
         return ( 
                     
       <View style={styles.container}>
+                 <LinearGradient   colors={['#01061C', '#38385E']}
+          style={{width:420, height:'100%', alignItems: 'center'}}>
              
             <View style={styles.containerTop}>
                
                 {/*-- Back button +  Name of the page + Icon */}
+                <Text style={styles.title}>Group Page</Text>
                 
                 <Text>{this.state.gname}</Text>
             </View>
 
             <View style={styles.middleContainer}>
               <View>
-                  <Text> Scoreboard </Text>
+                  <Text style={styles.textLabel}> Scoreboard </Text>
                   {allusers}
               </View> 
 
             </View>
+            <Nav/>
+          </LinearGradient>
       </View>
      
     );
@@ -173,19 +182,40 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
     
-    containerTop: {
+containerTop: {
     marginTop:0,
     backgroundColor: '#49CBC6',
     top: 0,
     width:412,
     height:100,
   },
+    
+title: {
+    color: 'white',
+    top:'30%',
+    fontSize: 30,
+    textAlign: 'center',
+    //fontFamily: 'Raleway-Regular',
+    //fontFamily: 'NunitoSans-Regular',
+  }, 
   
   middleContainer: {
     marginTop:20,
     padding:10,
     height:'70%',
     width:'100%',
+  },
+textLabel: {
+    color: '#49CBC6',
+    fontSize: 20,
+    textAlign: 'left',
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignSelf: 'stretch',
+    marginTop: 10,
+    marginBottom: -5,
+    //fontFamily: 'Raleway-Regular',
+   // fontFamily: 'NunitoSans-Regular',
   },
 });
 

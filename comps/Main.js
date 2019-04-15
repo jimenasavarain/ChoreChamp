@@ -79,10 +79,12 @@ import {ChangePage} from "../redux/actions";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: 'red',
     alignItems: 'center',
     justifyContent: 'center',
   },
+
+    
 });
 
 function mapStateToProps(state){

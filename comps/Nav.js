@@ -21,11 +21,14 @@ import {ChangePage} from "../redux/actions";
         
     return (
       <View style={styles.container}>
-        <Button title="New Task" onPress={this.handleButton.bind(this, 'CTask')} />
-        <Button title="Group" onPress={this.handleButton.bind(this, 'Group')} />
-        <Button title="Tasks" onPress={this.handleButton.bind(this, 'AllTasks')} />
-        <Button title="Profile" onPress={this.handleButton.bind(this, 'Profile')} />
+          <View style={styles.buttons}>
 
+            <Button title="New Task" onPress={this.handleButton.bind(this, 'CTask')} />
+            <Button title="Group" onPress={this.handleButton.bind(this, 'Group')} />
+            <Button title="Tasks" onPress={this.handleButton.bind(this, 'AllTasks')} />
+            <Button title="Profile" onPress={this.handleButton.bind(this, 'Profile')} />
+
+          </View>
       </View>
     );
   }
@@ -33,8 +36,14 @@ import {ChangePage} from "../redux/actions";
 
 const styles = StyleSheet.create({
   container: {
+      position: 'absolute',
+    bottom:0,
+   
+  },
+buttons: {
     flexDirection:'row',
     justifyContent: 'space-between',
+    
   },
 });
 

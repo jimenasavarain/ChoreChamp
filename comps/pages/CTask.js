@@ -6,6 +6,7 @@ import DatePicker from 'react-native-datepicker';
 import { Rating } from 'react-native-ratings';
 
 //https://www.npmjs.com/package/react-native-dialogbox
+import Nav from "../Nav";
 
 import {connect} from 'react-redux';
 import {ChangePage} from '../../redux/actions';
@@ -143,8 +144,12 @@ class CTask extends React.Component {
           </TouchableOpacity>
       
         </View>
+                           
             </ScrollView>
+            
+            
             </KeyboardAvoidingView>
+       <Nav/>
             </LinearGradient>
       </View>
 
