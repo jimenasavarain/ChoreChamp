@@ -323,14 +323,15 @@ handleOpacity=()=>{
     render() {
     return (
           <View  style={styles.container}> 
-          
+          <LinearGradient   colors={['#01061C', '#38385E']}
+          style={{width:420, height:'100%', alignItems: 'center'}}>
               
             <View style={styles.topNav}> 
               
             </View>
            <View style={styles.profileBox}>
               <Text style={styles.title}>
-                {this.state.un}
+                Name:{this.state.un}
               </Text>
             <TouchableOpacity style={styles.touchPic}
              onPress={this._pickImage}>
@@ -390,7 +391,7 @@ handleOpacity=()=>{
             <View style={styles.locationContainer}>
               <Text style={styles.locationText}>Current Address: {this.state.address}</Text>
             </View>
- 
+            </LinearGradient>
       </View>
     );
   }
@@ -481,12 +482,12 @@ const styles = StyleSheet.create({
    
    textBut: {
     fontSize: 25,
-    color: 'black',
+    color: '#49CBC6',
     },
 
   textScore: {
     fontSize: 14,
-    color: 'black',
+    color: '#49CBC6',
     margin:1,
     padding:2,
     textAlign:'center',
@@ -506,10 +507,9 @@ const styles = StyleSheet.create({
     },
     
   title: {
-    marginTop: 45,
+    top:20,
     fontSize: 24,
-//  left: 95,
-    color: 'black',
+    color: '#49CBC6',
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignSelf: 'center',//or 'stretch' to put on left side
@@ -546,7 +546,7 @@ const styles = StyleSheet.create({
     position:'relative',
     fontSize: 18,
     fontWeight:'500',
-    color: 'black',
+    color: '#49CBC6',
     zIndex:-100,
     elevation: 2, // Android
   },
@@ -564,7 +564,7 @@ const styles = StyleSheet.create({
   locationText: {
     height:80,
     fontSize: 15,
-    color: 'black',
+    color: '#49CBC6',
     justifyContent: 'center',
     borderColor:'#49CBC6',
     borderWidth:2,
