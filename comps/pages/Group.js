@@ -153,9 +153,9 @@ sortByScore=(a, b)=>{
             <View style={styles.containerTop}>
                
                 {/*-- Back button +  Name of the page + Icon */}
-                <Text style={styles.title}>Group Page</Text>
                 
-                <Text>{this.state.gname}</Text>
+                
+                <Text style={styles.title}>{this.state.gname}</Text>
             </View>
 
             <View style={styles.middleContainer}>
