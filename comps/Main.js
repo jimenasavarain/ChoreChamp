@@ -47,29 +47,7 @@ import {ChangePage} from "../redux/actions";
     return (
       <View style={styles.container}>
           {curpage}
-      <Button
-                title="Login"
-                onPress={this.handleButton.bind(this,'Login')}
-                />
-            <Button
-                title="Group"
-                onPress={this.handleButton.bind(this,'Group')}
-                />
-
-            <Button
-                title="Profile"
-                onPress={this.handleButton.bind(this,'Profile')}
-                />
-
-            <Button
-                title="Create Task"
-                onPress={this.handleButton.bind(this,'CTask')}
-                />
-
-            <Button
-                title="All Tasks"
-                onPress={this.handleButton.bind(this,'AllTasks')}
-                />
+     
 
       </View>
     );
@@ -79,12 +57,9 @@ import {ChangePage} from "../redux/actions";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'red',
     alignItems: 'center',
     justifyContent: 'center',
   },
-
-    
 });
 
 function mapStateToProps(state){

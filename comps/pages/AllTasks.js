@@ -1,5 +1,5 @@
 import React from 'react';
-import {Modal, StyleSheet, Text, View, Button, Alert, Link, Image, TouchableOpacity, TouchableHighlight, TextInput, ScrollView, } from 'react-native';
+import { Modal, StyleSheet, Text, View, Button, Alert, Link, Image, TouchableOpacity, TouchableHighlight, TextInput, ScrollView, } from 'react-native';
 import {Camera, Constants, Permissions, Location, ImagePicker, MapView, LinearGradient, Font, Asset } from 'expo';
 
 //https://www.npmjs.com/package/react-native-dialogbox
@@ -9,9 +9,9 @@ import { Rating } from 'react-native-ratings';
 import {connect} from 'react-redux';
 import {ChangePage, ChangeUserId} from '../../redux/actions';
 
-import AlertTask from './Alerts/AlertTask';
-import Nav from "../Nav";
+import Nav from '../Nav'
 
+import AlertTask from './Alerts/AlertTask';
 
 class AllTasks extends React.Component {
     
@@ -31,16 +31,13 @@ constructor(props) {
 
 // Fetch Data For Created Tasks ***  
 state={
-    tasks:"",
+    tasks:[],
     isChecked:[],
     userid:"",
     score:0,
     end_time:"",
     modalVisible: false,
-    curTask:null,
-    group_id:"",
-    task_id:[],
-    taskid:[],
+    curTask:null
   }
 
 // State to Open Modal
@@ -68,23 +65,23 @@ componentWillUnmount=()=>{
 handleUncheck=async (id)=>{
       var fd= new FormData();
       
-      fd.append("task_id", this.props.task_id);
-      console.log(this.props.task_id);
-      var resp=await fetch("https://alarmapracticum.herokuapp.com/uncheck.php", {
+      fd.append("task_id", id);
+      
+      var resp=await fetch("https://alarmaproj2.herokuapp.com/uncheck.php", {
         method:"POST",
         body:fd
       });
     
       
-//      this.handleTasks()
-    };
+      this.handleTasks()
+    }
 
 // Handle To Display Created Tasks
 handleTasks=async ()=>{
     var fd= new FormData();
-       fd.append("group_id", this.props.group_id);
+      fd.append("group_id", this.props.group_id);
       
-    var resp=await fetch("https://alarmapracticum.herokuapp.com/getTask.php", {
+    var resp=await fetch("https://alarmaproj2.herokuapp.com/getTask.php", {
       method:"POST",
       body:fd
     });
@@ -93,24 +90,20 @@ handleTasks=async ()=>{
       console.log(json);
       if (json.length > 0) {
         this.setState({
-          taskid:json
+          tasks:json
       
         });
       } else {
         
       }
-     //   console.log(taskid);
-
-  };
-//Handle to display Discription
-
+  }
 
 // Handle to Verify Tasks
 handleVerify=async (id)=>{
     var fd= new FormData();
         fd.append("task_id", id);
       
-        var resp=await fetch("https://alarmapracticum.herokuapp.com/taskDone.php", {
+        var resp=await fetch("https://alarmaproj2.herokuapp.com/taskDone.php", {
           method:"POST",
           body:fd
         });
@@ -121,15 +114,15 @@ handleVerify=async (id)=>{
             
         } else {
          }
-  };
+  }
 
 // Handle to Send Score
 handleScore=async (id)=>{
         var fd= new FormData();
         fd.append("user_id", this.props.userid);
-        fd.append("task_id", this.props.taskid);
+        fd.append("task_id", id);
       
-        var resp=await fetch("https://alarmapracticum.herokuapp.com/score.php", {
+        var resp=await fetch("https://alarmaproj2.herokuapp.com/score.php", {
           method:"POST",
           body:fd
         });
@@ -143,66 +136,117 @@ handleScore=async (id)=>{
           });
         } else {
          }
-    };
+    }
 
 // Grabbing and Displaying Tasks + Applying Verification & Score Functions
-//renderTasks=(tasks)=> {
- //}     
+renderTasks=(tasks)=> {
+    
+    var tasks = tasks || [];
+  console.log(tasks);
+   return tasks.map((task,index) =>
+                    
+     <View key={task.task_id}>
+                        
+    <CheckBox
+          style={{flex: 1, padding: 15}}
+          onClick={()=>{
+           var checkarr = this.state.isChecked;
+           if(checkarr[index]){
+             this.handleUncheck(task.task_id);
+
+           } else {
+             checkarr[index] = true;
+             this.handleScore(task.task_id);
+             
+            }
+            this.setState({
+                isChecked:checkarr
+            })
+          }}
+          isChecked={((this.state.isChecked[index] && this.state.isChecked[index] === true)) || (task.user_id !== null )}
+          rightText={this.state.task_title}
+      />                          
+
+        <TouchableOpacity onPress={() => {
+            this.setModalVisible(true, task);
+          }}>
+           <View style={styles.allTasks}>
+            <Text style={styles.taskTitle}>{task.task_title}</Text>
+            <Text style={styles.taskDesc}>{task.task_description}</Text>  
+            <Text style={styles.dueDate}>{task.end_time.split("")[0]}</Text>
+        
+                        
+    <View>
+      {(this.props.admin === 2) ?
+            <TouchableOpacity 
+                  onPress={this.handleVerify.bind(this,task.task_id)}
+                    style={{width: 50, height: 50, }}>
+                  <Text style={styles.taskTitle}>Verify Task</Text>
+            </TouchableOpacity> : null}
+    
+        
+      <View>
+          <Rating
+           type="star"
+           ratingColor='#3498db'
+           ratingBackgroundColor='#c8c7c8'
+            ratingCount={5}
+            startingValue={parseInt(task.score)}
+            readonly= {true}
+            imageSize={20}
+            style={{ paddingVertical: 10, }}
+          /> 
+        </View>
+      </View>
+               
+        </View>
+      </TouchableOpacity>
+      <View>                 
+        <Modal
+          animationType="none"
+          transparent={true}
+          visible={this.state.modalVisible}
+          onRequestClose={() => {
+            Alert.alert('Modal has been closed.');
+                            }}>
+            <AlertTask task={this.state.curTask} close={()=>{
+              this.setState({
+                modalVisible:false
+              })}}
+              done={this.handleScore}
+              />
+                        
+        </Modal>
+     </View>
+    </View>
+                        
+                    
+   );
+ }     
 
     render() {
-        const state = this.state;
-        var alllTasks=this.state.taskid.map((obj, index)=> {
-        
-        return (
-            <View>
-                
-            <TouchableOpacity onPress={() => this.handleOnPress(index)}>
-              <View style={styles.allTasks}>
-              <View>
-                  
-                <Text style={styles.taskTitle}>{"  "}{obj.task_title}
-                  
-                  </Text>
-                  
-                  <Text style={styles.taskDesc}>{"  "}{obj.task_description}
-                  </Text> 
-                  <Text style={styles.dueDate}>{"  "}{obj.end_time}
-                  
-                  </Text>
-                  
-              </View>
-              </View>
-            </TouchableOpacity>
-            </View>
-          );
-        })
-
-    
+       
     return (
     
         <View style={styles.container}>
-             <LinearGradient   colors={['#01061C', '#38385E']}
+            
+        <LinearGradient   colors={['#01061C', '#38385E']}
           style={{width:420, height:'100%', alignItems: 'center'}}>
-             
+            
             <View style={styles.containerTop}>
-               
-                {/*-- Back button +  Name of the page + Icon */}
-                
-                
                 <Text style={styles.title}>Tasks</Text>
             </View>
-             <Text style={{fontSize: 18, top: -120}}>All Your Tasks</Text>
         
-        <View >
-          <ScrollView>
-              <View style={styles.middleContainer}>
-                  {alllTasks}
-                  
-              </View>
-          </ScrollView>
+        <View style={styles.middleContainer}>
+                 
+            <ScrollView>
+            {this.renderTasks(this.state.tasks)}
+            </ScrollView>
+            
+            <Nav/>
+            
         </View>
-                 <Nav/>
-            </LinearGradient>
+        </LinearGradient>
     </View> 
     );
   }

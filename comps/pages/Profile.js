@@ -392,8 +392,8 @@ handleOpacity=()=>{
             <View style={styles.locationContainer}>
               <Text style={styles.locationText}>Current Address: {this.state.address}</Text>
             </View>
-            </LinearGradient>
             <Nav/>
+        </LinearGradient>
       </View>
     );
   }

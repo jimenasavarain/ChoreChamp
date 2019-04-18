@@ -38,7 +38,7 @@ state={
     var fd= new FormData();
       fd.append("group_id", this.props.group_id);
       console.log(this.props.group_id);
-    var resp=await fetch("https://alarmapracticum.herokuapp.com/getUsers.php", {
+    var resp=await fetch("https://alarmaproj2.herokuapp.com/getUsers.php", {
       method:"POST",
       body:fd
     });
@@ -82,7 +82,7 @@ state={
       fd.append("group_id", this.props.group_id);
     
     var resp=await
-    fetch("https://alarmapracticum.herokuapp.com/getGroupName.php", {
+    fetch("https://alarmaproj2.herokuapp.com/getGroupName.php", {
       method:"POST",
       body:fd
     });
@@ -134,7 +134,7 @@ sortByScore=(a, b)=>{
             <View>
                 
             <TouchableOpacity onPress={() => this.handleOnPress(index)}>
-              <View>
+              <View style={styles.users}>
                 <Text style={styles.textLabel}>{(obj.score)? obj.score : 0}</Text>
                   
                 <Text style={styles.textLabel}>{"  "}{obj.username}</Text>
@@ -153,12 +153,13 @@ sortByScore=(a, b)=>{
             <View style={styles.containerTop}>
                
                 {/*-- Back button +  Name of the page + Icon */}
-                
-                
-                <Text style={styles.title}>{this.state.gname}</Text>
-            </View>
+                <Text style={styles.title}>Group Page</Text>
+                   </View>
 
             <View style={styles.middleContainer}>
+               <View>
+                <Text style={styles.groupname}>{this.state.gname}</Text>
+            </View>
               <View>
                   <Text style={styles.textLabel}> Scoreboard </Text>
                   {allusers}
@@ -217,6 +218,14 @@ textLabel: {
     //fontFamily: 'Raleway-Regular',
    // fontFamily: 'NunitoSans-Regular',
   },
+ groupname:{
+    color:'white',
+    fontSize:25,
+    textAlign:'center',
+  },
+  users:{
+    flexDirection: 'row',
+  }
 });
 
 function mapStateToProps(state){

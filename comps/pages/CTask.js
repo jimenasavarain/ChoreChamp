@@ -6,12 +6,17 @@ import DatePicker from 'react-native-datepicker';
 import { Rating } from 'react-native-ratings';
 
 //https://www.npmjs.com/package/react-native-dialogbox
-import Nav from "../Nav";
 
 import {connect} from 'react-redux';
 import {ChangePage} from '../../redux/actions';
+import Nav from '../Nav';
+
 
 class CTask extends React.Component {
+  
+     handleButton=(switchPageNum)=>{
+    this.props.dispatch(ChangePage(switchPageNum))
+  }
     
   task_title = "";
   task_description = "";
@@ -23,7 +28,7 @@ class CTask extends React.Component {
     constructor(props) {
       super(props);
       this.state = { 
-      date:"2019-04-12",
+      date:"",
       };
   }
 
@@ -42,7 +47,7 @@ class CTask extends React.Component {
       fd.append("group_id", this.props.group_id);
 
       
-    var resp=await fetch("https://alarmapracticum.herokuapp.com/createTask.php", {
+    var resp=await fetch("https://alarmaproj2.herokuapp.com/createTask.php", {
       method:"POST",
       body:fd
     });
@@ -142,14 +147,12 @@ class CTask extends React.Component {
             onPress={this.handleProfile}>
           <Text style={styles.cTaskTxt}>Create Task</Text>
           </TouchableOpacity>
-      
         </View>
-                           
             </ScrollView>
             
-            
+            <Nav />
             </KeyboardAvoidingView>
-       <Nav/>
+
             </LinearGradient>
       </View>
 
@@ -203,7 +206,7 @@ title: {
     marginTop:15,
     marginBottom:5, 
     backgroundColor:'white',
-    borderColor: 'yellow',
+    borderColor: '#297373',
     backgroundColor:'white',
     borderRadius: 6,
     borderWidth: 2,

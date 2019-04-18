@@ -1,5 +1,5 @@
 {
-  "name": "empty-project-template",
+  "name": "chorechamp",
   "main": "node_modules/expo/AppEntry.js",
   "private": true,
   "scripts": {
@@ -9,14 +9,31 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "babel-preset-react-native": "2.1.0",
     "expo": "^30.0.1",
     "react": "16.3.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-30.0.0.tar.gz",
+    "react-native-check-box": "^2.1.7",
+    "react-native-circular-progress": "^1.1.0",
     "react-native-datepicker": "^1.7.2",
+    "react-native-dialogbox": "^0.6.10",
+    "react-native-elements": "^1.1.0",
+    "react-native-google-places-autocomplete": "^1.3.9",
+    "react-native-modal": "^9.0.0",
+    "react-native-paper": "^2.15.2",
     "react-native-ratings": "^6.3.1",
     "react-native-scripts": "^2.0.1",
-    "react-redux": "^5.0.7",
+    "react-native-svg": "^9.4.0",
+    "react-native-vector-icons": "^6.4.2",
+    "react-redux": "^5.1.1",
+    "react-timer-mixin": "^0.13.4",
     "redux": "^4.0.1",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "yarn": "^1.15.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.3",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/runtime": "^7.4.3"
   }
 }

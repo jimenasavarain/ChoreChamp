@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "tutorial3",
-    "description": "This project is really great.",
-    "slug": "tutorial3",
+    "name": "ChoreChamp",
+    "description": "Practicum app",
+    "slug": "ChoreChamp",
     "privacy": "public",
     "sdkVersion": "30.0.0",
     "platforms": ["ios", "android"],
@@ -22,6 +22,9 @@
     ],
     "ios": {
       "supportsTablet": true
+    },
+    "android": {
+        "package": "com.practicum.chorechamp"
     }
   }
 }
