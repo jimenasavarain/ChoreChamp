@@ -1,14 +1,15 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, Alert, Link, Image, TouchableOpacity, KeyboardAvoidingView,ScrollView, TouchableHighlight, TextInput  } from 'react-native';
+import { StyleSheet, Text, View, Button, Alert, Link, Image, TouchableOpacity, KeyboardAvoidingView,ScrollView, TouchableHighlight, TextInput} from 'react-native';
 
 import {connect} from "react-redux";
 import {ChangePage, ChangeUserId} from '../../redux/actions';
-import { Asset, Font } from "expo";
+import { Asset, Font, LinearGradient } from "expo";
+//import url('https://fonts.googleapis.com/css?family=Nunito:200');
 
 class Login extends React.Component {
     
   
-  //Database
+  //Database 
   
   email = "default@gmail.com";
   password = "default";
@@ -23,7 +24,7 @@ class Login extends React.Component {
     var fd= new FormData();
       fd.append("email", this.email);
       fd.append("password", this.password);
-    var resp=await fetch("https://alarmapracticum.herokuapp.com/login.php", {
+    var resp=await fetch("https://alarmaproj2.herokuapp.com/login.php", {
       method:"POST",
       body:fd
     });
@@ -45,63 +46,112 @@ class Login extends React.Component {
 
     render() {
     return (
-        <View style={styles.container}>
-        <View style={styles.containerTop}>
-          <TouchableOpacity style={styles.touch} onPress={this.handleButton}>
-        </TouchableOpacity>
-          <Text>Log In</Text>
+      <LinearGradient colors={['#38385E', '#01061C']}
+       style={{width: '100%', height:'100%', alignItems: 'center',}}>
+    <ScrollView>
+        
+      
+        <View>
+        <Text style={styles.header}>ChoreChamp</Text>
         </View>
         
+            
+                
+                      <View>
+                        <Text style={styles.h1}>Sign In</Text>
+                      </View>
+      <View style={styles.midLogin}>
+          <KeyboardAvoidingView>
+        <Text style={styles.email}>Email</Text>
         
-                <KeyboardAvoidingView 
-           behavior="padding" enabled>
-                      <ScrollView > 
-      
-          
-        <Text>Email</Text>
-        
-        <TextInput autoCapitalize="none" autoCorrect={false} underlineColorAndroid='transparent'
+        <TextInput style={styles.input1} autoCapitalize="none" autoCorrect={false} underlineColorAndroid='transparent'
         onChangeText={(text) => this.email=text}
         
       />
-        <Text>Password</Text>
+        <Text style={styles.pass}>Password</Text>
         
-        <TextInput autoCapitalize="none" autoCorrect={false} underlineColorAndroid='transparent'
+        <TextInput style={styles.input2} autoCapitalize="none" autoCorrect={false} underlineColorAndroid='transparent'
         onChangeText={(text) => this.password=text}
         secureTextEntry={true}
       />
+    <TouchableOpacity onPress={this.handleProfile} style={styles.loginbut}>
+          <Text style={styles.textlogin}>Login</Text> 
+           
+            </TouchableOpacity>
+        </KeyboardAvoidingView>
+          </View>
       
-          <TouchableOpacity 
-            onPress={this.handleProfile}>
-            <Text>Log In</Text>
-          </TouchableOpacity>
+         </ScrollView> 
+      </LinearGradient>
       
-            </ScrollView>
-
-              </KeyboardAvoidingView>
-
-      </View>
-      
-    );
+    )
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignSelf: 'stretch',
-    backgroundColor: '#fff',
-    alignItems: 'center',
-  },
-    
   
-  containerTop: {
-    marginTop:0,
-    backgroundColor: '#49CBC6',
-    top: 0,
-    width:412,
-    height:100,
+  header: {
+    color: '#89D5C9',
+    fontSize: 40,
+    textAlign: 'center',
+    top: 220
+    //fontFamily:'Nunito, sans-serif'
   },
+  
+  midLogin: {
+    marginTop:400,
+    textAlign: 'left',
+    padding: 0,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    width: 300,
+    height:200,
+    zIndex: 2
+  },
+  
+  h1: {
+    color:'white',
+    fontSize:30,
+    top:300,
+    textAlign:'center'
+  },
+  email:{
+    color: '#FF8357',
+    fontSize: 20,
+  },
+   pass:{
+    color: '#FF8357',
+    fontSize: 20,
+  },
+  
+  input1:{
+    borderColor:'#297373',
+  },
+  
+    input2:{
+    borderColor:'#297373',
+  },
+  
+  logoImg:{
+    top: 100
+  },
+  
+  loginbut:{
+    alignItems: 'center',
+    width: 200,
+    left: 50,
+    padding: 5,
+    paddingTop: 17,
+    borderRadius: 15,
+    backgroundColor: '#49CBC6',
+  },
+  
+  textlogin:{
+    fontSize:20,
+    textAlign:'center',
+    color: 'white',
+  }
+
 });
 
 function mapStateToProps(state){
