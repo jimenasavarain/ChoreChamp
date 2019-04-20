@@ -1,14 +1,15 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, Alert, Link, Image, TouchableOpacity, KeyboardAvoidingView,ScrollView, TouchableHighlight, TextInput  } from 'react-native';
+import { StyleSheet, Text, View, Button, Alert, Link, Image, TouchableOpacity, KeyboardAvoidingView,ScrollView, TouchableHighlight, TextInput} from 'react-native';
 
 import {connect} from "react-redux";
 import {ChangePage, ChangeUserId} from '../../redux/actions';
-import { Asset, Font } from "expo";
+import { Asset, Font, LinearGradient } from "expo";
+//import url('https://fonts.googleapis.com/css?family=Nunito:200');
 
 class Login extends React.Component {
     
   
-  //Database
+  //Database 
   
   email = "default@gmail.com";
   password = "default";
@@ -45,63 +46,138 @@ class Login extends React.Component {
 
     render() {
     return (
-        <View style={styles.container}>
-        <View style={styles.containerTop}>
-          <TouchableOpacity style={styles.touch} onPress={this.handleButton}>
-        </TouchableOpacity>
-          <Text>Log In</Text>
-        </View>
+      <LinearGradient colors={['#38385E', '#01061C']}
+       style={{width: '100%', height:'100%', alignItems: 'center',}}>
+                <Image style={styles.imgUn}
+                      source={require('../Content/icons/img_unavailable.png')}
+                      /> 
+            
+                <View>
+                    <Text style={styles.header}>ChoreChamp</Text>
+                </View>
+                
+               
+                <View style={styles.midLogin}>
+                    <KeyboardAvoidingView 
+                    style={styles.keyboardView} 
+                    behavior='position' >
+                        
+                    <View style={styles.signCon}>
+                        <ScrollView>
+                        <Text style={styles.signInTitle}>Email</Text>
         
+                        <TextInput 
+                            style={styles.signInput} 
+                            autoCapitalize="none" 
+                            autoCorrect={false} underlineColorAndroid='transparent'
+                            onChangeText={(text) => this.email=text}
         
-                <KeyboardAvoidingView 
-           behavior="padding" enabled>
-                      <ScrollView > 
-      
-          
-        <Text>Email</Text>
-        
-        <TextInput autoCapitalize="none" autoCorrect={false} underlineColorAndroid='transparent'
-        onChangeText={(text) => this.email=text}
-        
-      />
-        <Text>Password</Text>
-        
-        <TextInput autoCapitalize="none" autoCorrect={false} underlineColorAndroid='transparent'
-        onChangeText={(text) => this.password=text}
-        secureTextEntry={true}
-      />
-      
-          <TouchableOpacity 
-            onPress={this.handleProfile}>
-            <Text>Log In</Text>
-          </TouchableOpacity>
-      
-            </ScrollView>
+                        />
+                        <Text style={styles.signInTitle}>Password</Text>
 
-              </KeyboardAvoidingView>
-
-      </View>
+                        <TextInput 
+                            style={styles.signInput} 
+                            autoCapitalize="none" 
+                            autoCorrect={false} underlineColorAndroid='transparent'
+                            onChangeText={(text) => this.password=text}
+                            secureTextEntry={true}
+                        />
+                        
+                        <TouchableOpacity 
+                            onPress={this.handleProfile} 
+                            style={styles.loginbut}>
+                            
+                        <Text style={styles.textlogin}>Sign In</Text> 
+           
+                        </TouchableOpacity>
+                        </ScrollView>
+                        </View>
+                    </KeyboardAvoidingView>
+                </View>
       
-    );
+      </LinearGradient>
+      
+    )
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignSelf: 'stretch',
-    backgroundColor: '#fff',
-    alignItems: 'center',
+  
+  imgUn:{
+    position: 'relative',
+    top:10,
+    width:'20%',  
+    height:'10%',  
   },
     
-  
-  containerTop: {
-    marginTop:0,
-    backgroundColor: '#49CBC6',
-    top: 0,
-    width:412,
-    height:100,
+  header: {
+    color: '#89D5C9',
+    fontSize: 40,
+    textAlign: 'center',
+    position:'relative',
+    top: 35,
+    //fontFamily:'Nunito, sans-serif'
   },
+  
+  midLogin: {
+    alignItems:'flex-start',
+    //backgroundColor: 'red',
+    //borderRadius: 10,
+    height: '70%',
+    paddingHorizontal:'10%',
+    position:'relative',
+    top:40,
+    zIndex: 2,
+  },
+ keyboardView:{
+    //backgroundColor:'orange',
+    justifyContent: 'space-between',
+    flex:1,
+  },
+ signCon:{
+     //backgroundColor:'#CCC',
+     position:'relative',
+     top:100,
+    },
+  
+ signInTitle:{
+    color: '#FF8357',
+    fontSize: 25,
+  },
+  
+ signInput:{
+    borderWidth:2,
+    borderRadius: 5,
+    borderColor:'#49CBC6',
+    backgroundColor:'white',
+    padding:10,
+    fontSize:25,
+    marginBottom:15,
+    width:'100%',
+
+  },
+  
+  logoImg:{
+    top: 100
+  },
+  
+  loginbut:{
+    alignItems: 'center',
+    width:300,
+    borderRadius: 7,
+    backgroundColor: '#49CBC6',
+    marginTop:15,
+
+  },
+  
+  textlogin:{
+    fontSize:25,
+    padding: 12,
+    textAlign:'center',
+    color: 'white',
+    //backgroundColor:'blue',
+  }
+
 });
 
 function mapStateToProps(state){

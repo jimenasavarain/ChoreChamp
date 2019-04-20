@@ -145,10 +145,12 @@ renderTasks=(tasks)=> {
   console.log(tasks);
    return tasks.map((task,index) =>
                     
-     <View key={task.task_id}>
+     <View
+         style={styles.allTasks}
+         key={task.task_id}>
                         
     <CheckBox
-          style={{flex: 1, padding: 15}}
+          style={{position: 'relative', left:0, top:10,  alignItems: 'flex-start'}}
           onClick={()=>{
            var checkarr = this.state.isChecked;
            if(checkarr[index]){
@@ -167,40 +169,51 @@ renderTasks=(tasks)=> {
           rightText={this.state.task_title}
       />                          
 
-        <TouchableOpacity onPress={() => {
-            this.setModalVisible(true, task);
-          }}>
-           <View style={styles.allTasks}>
+        <TouchableOpacity 
+            style={{
+                    alignItems: 'flex-start', 
+                    width:'90%', 
+                    position:'relative', 
+                    left:30,
+                    bottom:20,
+                            }}
+            onPress={() => {
+                this.setModalVisible(true, task);
+                }
+            }>
+           <View >
             <Text style={styles.taskTitle}>{task.task_title}</Text>
-            <Text style={styles.taskDesc}>{task.task_description}</Text>  
-            <Text style={styles.dueDate}>{task.end_time.split("")[0]}</Text>
+            <View>
+                <Rating
+                   type="star"
+                   ratingColor='#3498db'
+                   ratingBackgroundColor='#c8c7c8'
+                   ratingCount={5}
+                   startingValue={parseInt(task.score)}
+                   readonly= {true}
+                   imageSize={20}
+                   style={{ paddingVertical: 10, }}
+                /> 
+            </View>
+            <Text style={styles.taskDetails}>{task.task_description}</Text>  
+            <Text style={styles.taskDetails}>due on: {task.end_time.split(" ")[0]}</Text>
         
                         
-    <View>
+    
+               
+      </View>
+            
+      </TouchableOpacity>
+                        <View style={styles.verifyCon}>
       {(this.props.admin === 2) ?
             <TouchableOpacity 
-                  onPress={this.handleVerify.bind(this,task.task_id)}
-                    style={{width: 50, height: 50, }}>
-                  <Text style={styles.taskTitle}>Verify Task</Text>
+                  onPress={this.handleVerify.bind(this,task.task_id)}>
+                  <Text style={styles.verifyButt}>Verify Task</Text>
             </TouchableOpacity> : null}
     
         
-      <View>
-          <Rating
-           type="star"
-           ratingColor='#3498db'
-           ratingBackgroundColor='#c8c7c8'
-            ratingCount={5}
-            startingValue={parseInt(task.score)}
-            readonly= {true}
-            imageSize={20}
-            style={{ paddingVertical: 10, }}
-          /> 
-        </View>
+      
       </View>
-               
-        </View>
-      </TouchableOpacity>
       <View>                 
         <Modal
           animationType="none"
@@ -229,25 +242,22 @@ renderTasks=(tasks)=> {
     return (
     
         <View style={styles.container}>
-            
-        <LinearGradient   colors={['#01061C', '#38385E']}
-          style={{width:420, height:'100%', alignItems: 'center'}}>
-            
-            <View style={styles.containerTop}>
-                <Text style={styles.title}>Tasks</Text>
-            </View>
-        
-        <View style={styles.middleContainer}>
-                 
-            <ScrollView>
-            {this.renderTasks(this.state.tasks)}
-            </ScrollView>
-            
-            <Nav/>
-            
-        </View>
-        </LinearGradient>
-    </View> 
+            <LinearGradient   colors={['#01061C', '#38385E']}
+              style={{width:420, height:'100%', alignItems: 'center'}}>
+
+                <View style={styles.containerTop}>
+                    <Text style={styles.title}>Tasks</Text>
+                </View>
+
+                <View style={styles.middleContainer}>
+                    <ScrollView style={{width:'100%',}}>
+                        {this.renderTasks(this.state.tasks)}
+                    </ScrollView>
+                    
+                </View>
+                <Nav/>
+            </LinearGradient>
+        </View> 
     );
   }
 }
@@ -281,38 +291,51 @@ const styles = StyleSheet.create({
    middleContainer: {
     position:'absolute',
     top:'30%',
-    marginTop:20,
     height:'70%',
+    width:'80%',
     alignItems:'center',
+    //backgroundColor:'red',
    
   },
 allTasks: {
     
    borderWidth: 2,
    borderColor: '#49CBC6',
-   backgroundColor:"#FFF",
+   backgroundColor:'#FFF',
    position:'relative',
-   width:'85%',
+   width:'100%',
    marginBottom:'5%',
 
 
 
 },
-taskTitle:{
-    fontSize:30,
-    color:'#49CBC6',
+    taskTitle:{
+     fontSize:30,
+     color:'#49CBC6',
     
 },
 
-taskDesc: {
-    fontSize:25,
+    taskDetails:{
+     fontSize:25,
+     color:'grey',
     },
-
-dueDate:{
-    fontSize:25,
-
+    
+    verifyButt:{
+     fontSize:25,
+     padding: 12,
+     textAlign:'center',
+     color: '#FFF',
+     backgroundColor:'#49CBC6',
+     borderWidth:2,
+     borderRadius: 5,
+     borderColor:'#49CBC6',
+     marginBottom:20,
         
-    }
+    },
+    verifyCon:{
+     alignItems:'center',
+        
+    },
 });
 
 function mapStateToProps(state){

@@ -401,19 +401,13 @@ handleOpacity=()=>{
 
 const styles = StyleSheet.create({
     container: {
-    flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
     width: '100%',
     },
     
-  locationContainer: {
-    top:80,
-    width:280,
-    height:'auto',
-    top:60,
-  },
+ 
 
   touch: {
     width: 100,
@@ -517,7 +511,6 @@ const styles = StyleSheet.create({
     alignSelf: 'center',//or 'stretch' to put on left side
 //  textAlign: 'left',
     marginBottom: -10,
-    elevation: 2, // Android
     },
  
 
@@ -541,7 +534,6 @@ const styles = StyleSheet.create({
     padding:4,
     zIndex:-21,
     flexDirection: 'row',
-    elevation: 2, // Android
   },
 
   lvlText:{
@@ -550,31 +542,35 @@ const styles = StyleSheet.create({
     fontWeight:'500',
     color: '#49CBC6',
     zIndex:-100,
-    elevation: 2, // Android
   },
 
   map: {
     width:280, 
     height:120,
     margin: 25,
-    bottom:120,
+    bottom:200,
     position:'absolute',
     borderRadius:10,
-    elevation: 2, // Android
   },
     
-  locationText: {
-    height:80,
-    fontSize: 15,
-    color: '#49CBC6',
-    justifyContent: 'center',
+locationContainer: {
+    position:'relative',
+    backgroundColor:'#FFF',  
+    bottom:80,
+    width:280,
+    height:120,
     borderColor:'#49CBC6',
     borderWidth:2,
-    marginBottom: 100,
-    borderRadius: 15,
-    padding:8,
-    elevation: 2, // Android
+    borderRadius: 5,
+    
+  },
+    
+locationText: {
+    fontSize: 15,
+    color: '#49CBC6',
+    padding:10,
     },
+    
 });
 
  function mapStateToProps(state){

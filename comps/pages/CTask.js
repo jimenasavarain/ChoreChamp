@@ -78,19 +78,21 @@ class CTask extends React.Component {
            <Text style={styles.title}>Create Task</Text>
         </View>
         
-        <KeyboardAvoidingView style={styles.KeyboardView} 
+        <KeyboardAvoidingView 
+           style={styles.keyboardView} 
            behavior="padding" enabled>
-                      <ScrollView > 
-        <View style={styles.middleContainer}>
-          <Text style={styles.textLabel}>Title</Text>
+              <ScrollView > 
+                    <View style={styles.middleContainer}>
+                        <Text style={styles.textLabel}>Title</Text>
 
-          <TextInput
-            style={styles.titleInp}
-            autoCapitalize="sentences" autoCorrect={true} underlineColorAndroid='transparent'
-            onChangeText={(text) => this.task_title=text}
-
-          />
-          <Text style={styles.textLabel}>Due Date</Text>
+                        <TextInput
+                            style={styles.titleInp}
+                            autoCapitalize="sentences" 
+                            autoCorrect={true} 
+                            underlineColorAndroid='transparent'
+                            onChangeText={(text) => this.task_title=text}
+                        />
+                        <Text style={styles.textLabel}>Due Date</Text>
 
         <DatePicker
             style={styles.datePicker}
@@ -121,7 +123,10 @@ class CTask extends React.Component {
       />
           <Text style={styles.textLabel}>Description</Text>
 
-          <TextInput autoCapitalize="sentences" autoCorrect={true} underlineColorAndroid='transparent'
+          <TextInput 
+            autoCapitalize="sentences" 
+            autoCorrect={true} 
+            underlineColorAndroid='transparent'
             style={styles.decInput}
             onChangeText={(text) => this.task_description=text}
             multiline = {true}
@@ -129,7 +134,10 @@ class CTask extends React.Component {
             numberOfLines ={6}
           />
    
-    <Text style={styles.textLabel}>Points</Text>
+    <Text style={styles.textLabel}>Points
+        <Text style={styles.tuts}> Use your finger to swipe </Text>                
+        </Text>
+                        
        <Rating
            type="custom"
            ratingColor='#F1CA02'
@@ -149,10 +157,10 @@ class CTask extends React.Component {
           </TouchableOpacity>
         </View>
             </ScrollView>
+           
             
-            <Nav />
             </KeyboardAvoidingView>
-
+ <Nav />
             </LinearGradient>
       </View>
 
@@ -185,7 +193,7 @@ title: {
     height:100,
   },
     
-  KeyboardView: {
+  keyboardView: {
     position:'absolute',
     flex:1,
     top: '15%',
@@ -193,7 +201,7 @@ title: {
     justifyContent: 'space-between',
    // backgroundColor:'red',
     zIndex:1,
-    height:'70%',
+    height:'80%',
   },
     
   middleContainer: {
@@ -223,6 +231,11 @@ textLabel: {
     //fontFamily: 'Raleway-Regular',
    // fontFamily: 'NunitoSans-Regular',
   },
+tuts:{
+    color: '#FF8357',
+    fontSize: 20,
+ 
+},
 titleInp: {
     color: '#4d4d4d',
     fontSize: 15,
