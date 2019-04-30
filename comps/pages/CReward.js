@@ -12,42 +12,36 @@ import {ChangePage} from '../../redux/actions';
 import Nav from '../Nav';
 
 
-class CTask extends React.Component {
-  
-     
+class CReward extends React.Component {
     
-  task_title = "";
-  task_description = "";
-  rating=0;
-  end_time="";
+    reward_title = "";
+    reward_points= 0;
   
-handleButton=(switchPageNum)=>{
-    this.props.dispatch(ChangePage(switchPageNum))
-  }
+    handleButton=(switchPageNum)=>{
+        this.props.dispatch(ChangePage(switchPageNum))
+      }
+  
 
     constructor(props) {
-      super(props);
-      this.state = { 
-      date:"",
-      };
-  }
+        super(props);
+        this.state = { 
+            text: this.setState.text,
+        };
+    }
 
     
-    handleCTask=async ()=>{
-    if (this.task_title === '' || this.task_description === '' || this.date === '' || this.rating === 0){
-      alert("Please fill in the inputs");
+    handleCReward=async ()=>{
+        if (this.reward_title == '' || this.reward_points == ''){
+            alert("Please fill in the inputs");
       return false;
-    }
-   
-    var fd= new FormData();
-      fd.append("task_title", this.task_title);
-      fd.append("task_description", this.task_description);
-      fd.append("end_time", this.state.date+" 00:00:00");
-      fd.append("score", this.rating);
+        }
+        var fd= new FormData();
+      fd.append("reward_title", this.reward_title);
+      fd.append("reward_points", this.reward_points);
       fd.append("group_id", this.props.group_id);
-
       
-    var resp=await fetch("https://alarmaproj2.herokuapp.com/createTask.php", {
+      
+    var resp=await fetch("https://alarmaproj2.herokuapp.com/createReward.php", {
       method:"POST",
       body:fd
     });
@@ -56,17 +50,14 @@ handleButton=(switchPageNum)=>{
       console.log(json);
       if (json === true) {
         
-        //alert ("Task Created");
-        this.props.dispatch(ChangePage('AllTasks'));
+        //alert ("Reward Created");
+        this.props.dispatch(ChangePage('AllRewards'));
         
       } else {
         alert ("Something went wrong!");
       }
     }
     
-     ratingCompleted=(rating)=> {
-  this.rating = rating;
-  }
     
     render() {
     return (
@@ -75,7 +66,7 @@ handleButton=(switchPageNum)=>{
             <LinearGradient   colors={['#01061C', '#38385E']}
           style={{width:420, height:'100%', alignItems: 'center'}}>
         <View style={styles.containerTop}>
-           <Text style={styles.title}>Create Task</Text>
+           <Text style={styles.title}>Create Reward</Text>
         </View>
         
         <KeyboardAvoidingView 
@@ -90,72 +81,25 @@ handleButton=(switchPageNum)=>{
                             autoCapitalize="sentences" 
                             autoCorrect={true} 
                             underlineColorAndroid='transparent'
-                            onChangeText={(text) => this.task_title=text}
+                            onChangeText={(text) => this.reward_title=text}
                         />
-                        <Text style={styles.textLabel}>Due Date</Text>
+                        <Text style={styles.textLabel}>How much is this reward worth?</Text>
 
-        <DatePicker
-            style={styles.datePicker}
-            date={this.state.date}
-            mode="date"
-            placeholder="select date"
-            format="YYYY-MM-DD"
-            minDate="2018-12-01"
-            maxDate="2031-12-31"
-            confirmBtnText="Confirm"
-            cancelBtnText="Cancel"
-            customStyles={{
-                dateIcon: {
-                position: 'absolute',
-                left: 0,
-                top: -5,
-                marginLeft: 0,
-                marginTop:10
-                },
-                dateInput: {
-                marginLeft: 36,
-                borderColor: '#49CBC6',
-                borderRadius: 8,
-                height:50,
-          }
-        }}
-        onDateChange={(date) => {this.setState({date: date})}}
-      />
-          <Text style={styles.textLabel}>Description</Text>
+                        <TextInput 
+                            style={styles.titleInp}
+                            keyboardType = 'numeric'
+                            type="numeric"
+                            onChangeText={(text) => this.reward_points=text}
+                        /> 
 
-          <TextInput 
-            autoCapitalize="sentences" 
-            autoCorrect={true} 
-            underlineColorAndroid='transparent'
-            style={styles.decInput}
-            onChangeText={(text) => this.task_description=text}
-            multiline = {true}
-            maxLength={255}
-            numberOfLines ={6}
-          />
-   
-    <Text style={styles.textLabel}>Points
-        <Text style={styles.tuts}> Use your finger to swipe </Text>                
-        </Text>
-                        
-       <Rating
-           type="custom"
-           ratingColor='#F1CA02'
-           ratingBackgroundColor='#FFF'
-            startingValue={1}
-            ratingCount={5}
-            imageSize={35}
-            onFinishRating={this.ratingCompleted}
-            onStartRating={this.ratingStarted}
-            style={styles.rating}
-          /> 
 
-          <TouchableOpacity 
-            style={styles.cTaskButt}   
-            onPress={this.handleCTask}>
-          <Text style={styles.cTaskTxt}>Create Task</Text>
-          </TouchableOpacity>
-        </View>
+
+                      <TouchableOpacity 
+                        style={styles.cTaskButt}   
+                        onPress={this.handleCReward}>
+                      <Text style={styles.cTaskTxt}>Create Reward</Text>
+                      </TouchableOpacity>
+                    </View>
             </ScrollView>
            
             
@@ -305,4 +249,4 @@ function mapStateToProps(state){
 }
 
 //export after connecting to redux
-export default connect(mapStateToProps)(CTask);
+export default connect(mapStateToProps)(CReward);

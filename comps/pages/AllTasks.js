@@ -4,7 +4,7 @@ import {Camera, Constants, Permissions, Location, ImagePicker, MapView, LinearGr
 
 //https://www.npmjs.com/package/react-native-dialogbox
 
-import CheckBox from 'react-native-check-box';
+//import CheckBox from 'react-native-check-box';
 import { Rating } from 'react-native-ratings';
 import {connect} from 'react-redux';
 import {ChangePage, ChangeUserId} from '../../redux/actions';
