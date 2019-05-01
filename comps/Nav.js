@@ -55,7 +55,7 @@ import {ChangePage} from "../redux/actions";
                   <Image 
                       style={[styles.profileIcon, styles.icons] }
                       resize="contain"
-                      source={require('./Content/icons/profile.png')}
+                      source={require('./Content/icons/rewardNav.png')}
                       />  
               </TouchableOpacity>
               
@@ -101,7 +101,7 @@ groupIcon:{
 },  
 
 tasksIcon:{
-    width:40,
+    width:20,
     height:48,
 },   
     

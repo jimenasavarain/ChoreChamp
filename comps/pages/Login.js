@@ -49,12 +49,9 @@ class Login extends React.Component {
       <LinearGradient colors={['#38385E', '#01061C']}
        style={{width: '100%', height:'100%', alignItems: 'center',}}>
                 <Image style={styles.imgUn}
-                      source={require('../Content/icons/img_unavailable.png')}
+                      source={require('../Content/icons/Logo.png')}
                       /> 
             
-                <View>
-                    <Text style={styles.header}>ChoreChamp</Text>
-                </View>
                 
                
                 <View style={styles.midLogin}>
@@ -105,18 +102,9 @@ const styles = StyleSheet.create({
   
   imgUn:{
     position: 'relative',
-    top:10,
-    width:'20%',  
-    height:'10%',  
-  },
-    
-  header: {
-    color: '#89D5C9',
-    fontSize: 40,
-    textAlign: 'center',
-    position:'relative',
-    top: 35,
-    //fontFamily:'Nunito, sans-serif'
+    top:15,
+    width:'80%',  
+    height:'30%',  
   },
   
   midLogin: {
@@ -147,11 +135,11 @@ const styles = StyleSheet.create({
   
  signInput:{
     borderWidth:2,
-    borderRadius: 5,
+    borderRadius: 7,
     borderColor:'#49CBC6',
     backgroundColor:'white',
-    padding:10,
-    fontSize:25,
+    padding:5,
+    fontSize:20,
     marginBottom:15,
     width:'100%',
 
@@ -172,11 +160,11 @@ const styles = StyleSheet.create({
   
   textlogin:{
     fontSize:25,
-    padding: 12,
+    padding: 10,
     textAlign:'center',
     color: 'white',
     //backgroundColor:'blue',
-  }
+  },
 
 });
 
