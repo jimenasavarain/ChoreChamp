@@ -4,7 +4,10 @@ import Login from "./pages/Login";
 import Group from "./pages/Group";
 import Profile from "./pages/Profile";
 import CTask from "./pages/CTask";
+import CReward from "./pages/CReward";
 import AllTasks from "./pages/AllTasks";
+import AllRewards from "./pages/AllRewards";
+import AddButt from "./pages/AddButt";
 import Createacc from "./pages/Createacc";
 import CreateG from "./pages/CreateG";
 import JoinG from "./pages/JoinG";
@@ -36,12 +39,20 @@ import {ChangePage} from "../redux/actions";
              case 'Profile':
                 curpage = <Profile />;
                 break; 
+				
+		   case 'AddButt':
+                curpage = <AddButt />;
+                break; 
+				
+		   case 'CReward':
+                curpage = <CReward />;
+                break;   
                 
-            case 'CTask':
+           case 'CTask':
                 curpage = <CTask />;
                 break;   
                 
-            case 'AllTasks':
+           case 'AllTasks':
                 curpage = <AllTasks />;
                 break; 
             
@@ -59,7 +70,17 @@ import {ChangePage} from "../redux/actions";
           
           case 'ChooseGroup':
                 curpage = <ChooseGroup />;
-                break;       
+                break;  
+				
+		 
+                
+          case 'AllTasks':
+                curpage = <AllTasks />;
+                break;    
+				
+          case 'AllRewards':
+                curpage = <AllRewards />;
+                break;  
             
      }
         
