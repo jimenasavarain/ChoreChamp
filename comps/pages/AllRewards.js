@@ -4,21 +4,29 @@ import {Camera, Constants,  LinearGradient, Font} from 'expo';
 import LottieView from 'lottie-react-native';
 import {AnimatedCircularProgress } from 'react-native-circular-progress';
 import ProgressCircle from 'react-native-progress-circle'
+//npm install --save react-native-progress-circle
+
 //import {CircularProgress, AnimatedCircularProgress } from 'react-native-circular-progress';
 // npm i --save react-native-circular-progress react-native-svg
+
 // react-native link react-native-svg
 import Nav from '../Nav'
 
 import {connect} from 'react-redux';
 import {ChangePage, ChangePasscode, ChangeUserId} from '../../redux/actions';
+const Max_Points = '';
 
 
 class AllRewards extends React.Component {
 
   
 //states
-  
+admin ="";
 timer = null;
+
+constructor(props) {
+    super(props);
+  }
 
   state={
     isMoving: false,
@@ -27,7 +35,6 @@ timer = null;
     reward_title:"",
     reward_points:500,
     scoreT:0,
-    //points:325,
   };
   
 
@@ -37,7 +44,16 @@ timer = null;
     this.props.dispatch(ChangePage(CTask));
   }   
   
-    
+    componentWillMount=()=>{
+    this.handleRewards();
+    /*this.timer = setInterval(()=>{
+      this.handleRewards();
+    },1000);*/
+  }
+  
+  componentWillUnmount=()=>{
+    clearInterval(this.timer);
+  } 
 
   
   handleRewards=async ()=>{
@@ -123,47 +139,49 @@ timer = null;
      return(<View style={styles.taskCont} key={reward.id}>
      
            <View style={styles.contTitle}>
-                <Text style={styles.taskName}>{reward.reward_title}</Text>
+                <Text style={styles.rewardName}>
+                    {reward.reward_title}</Text>
             </View>
   
-{/*
+
       <Text style={styles.taskDesc}>    
           {reward.reward_points} points
+          
       </Text>
-*/}
-      <View style={{
-            position:'absolute', 
-            bottom:10,
-            left:19,
-            backgroundColor:'blue',
-            width:50,
-                   }}>
 
-          <AnimatedCircularProgress
-               size={116}
-               width={7}
-               fill={100}
-               //fill={pr}
-             // prefill={1000}
-               tintColor="#49CBC6"
-               backgroundColor="#4B7CB0"
-               ref={(ref) => this.circularProgress = ref}
-               >
-                  {
-                    (fill) => (
-                      <Text style={styles.points}>
-                            {reward.reward_points}
-                           {/* { Math.round(Max_Points * fill / 100) }*/}
-                      </Text>
+     
+          
+           <View style={{
+            backgroundColor:'red',
+                   }}>
+          <ProgressCircle
+                    percent={90}
+                    radius={50}
+                    borderWidth={8}
+                    color="#49CBC6"
+                    //shadowColor="#3399FF"
+                    //bgColor="#fff"
+                    ref={(ref) => this.circularProgress = ref}
+        >       
+              {
+                  (percent) => (
+                      <View style={styles.points}>
+                            {reward.scoreT}
+                      </View>
                     )
                   }
-          </AnimatedCircularProgress>
-        </View>
+        </ProgressCircle>
+          </View>
      
     </View>)
    });
  }
     render() {
+const fill = this.state.points / Max_Points * 50;
+           var rewards = rewards || [];
+
+        
+    
     return (
           <View  style={styles.container}> 
           <LinearGradient   colors={['#01061C', '#38385E']}
@@ -182,16 +200,17 @@ timer = null;
               <View style={styles.rewardsCon}>
                 {this.renderRewards(this.state.rewards)} 
                   
-               <ProgressCircle
-            percent={90}
-            radius={50}
-            borderWidth={8}
-            color="#3399FF"
-            shadowColor="#999"
-            bgColor="#fff"
-        >
-            <Text style={{ fontSize: 18 }}>{'90%'}</Text>
-        </ProgressCircle>
+                  <ProgressCircle
+                    percent={90}
+                    radius={50}
+                    borderWidth={8}
+                    color="#49CBC6"
+                    shadowColor="#FFF"
+                    //bgColor="#fff"
+                  >
+                    
+                  </ProgressCircle>
+               
                   
               </View>     
             </ScrollView>
@@ -234,7 +253,7 @@ taskDesc: {
     fontSize: 16,
     textAlign: 'right',
     marginRight: 10,
-    fontFamily: 'Raleway-Regular',
+    //fontFamily: 'Raleway-Regular',
     //fontFamily: 'NunitoSans-Regular',
     zIndex:20,
   },
@@ -275,8 +294,11 @@ taskDesc: {
     top: 30,
     elevation: 2, // Android
     },
-    rewardsCon: {
-    backgroundColor:'yellow', 
+    
+ rewardsCon: {
+    backgroundColor:'yellow',
+    position:'relative',
+    top:90,
     flexDirection:'row',
     flexWrap:'wrap',
     height: 700,
