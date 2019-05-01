@@ -32,7 +32,7 @@ import {ChangePage} from "../redux/actions";
                 onPress={this.handleButton.bind(this, 'Group')}>
                 <Image 
                     style={[styles.groupIcon, styles.icons] }
-                    resze="contain"
+                    resize="contain"
                     source={require('./Content/icons/GroupIcon.png')}
                       />  
             </TouchableOpacity>
@@ -44,7 +44,7 @@ import {ChangePage} from "../redux/actions";
                   onPress={this.handleButton.bind(this, 'AllTasks')}>
                   <Image 
                       style={[styles.tasksIcon, styles.icons] }
-                      resze="contain"
+                      resize="contain"
                       source={require('./Content/icons/task.png')}
                       />  
                </TouchableOpacity>
@@ -54,7 +54,7 @@ import {ChangePage} from "../redux/actions";
                   onPress={this.handleButton.bind(this, 'Profile')}>
                   <Image 
                       style={[styles.profileIcon, styles.icons] }
-                      resze="contain"
+                      resize="contain"
                       source={require('./Content/icons/profile.png')}
                       />  
               </TouchableOpacity>
@@ -65,7 +65,7 @@ import {ChangePage} from "../redux/actions";
             <TouchableOpacity style={styles.touch} onPress={this.handleButton.bind(this, 'AddButt')}>
                 <Image 
                   style={[styles.addButt, styles.icons]}
-                  resze="contain"
+                  resize="contain"
                   source={require('./Content/icons/addButt.png')}
                       />  
             </TouchableOpacity>
