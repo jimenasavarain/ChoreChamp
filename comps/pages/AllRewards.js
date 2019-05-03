@@ -3,8 +3,10 @@ import { StyleSheet, Text, View, Button, Alert, Link, Image, TouchableOpacity, T
 import {Camera, Constants,  LinearGradient, Font} from 'expo';
 import LottieView from 'lottie-react-native';
 import {AnimatedCircularProgress } from 'react-native-circular-progress';
-import ProgressCircle from 'react-native-progress-circle'
-//npm install --save react-native-progress-circle
+
+import PercentageCircle from 'react-native-percentage-circle';
+//npm i react-native-percentage-circle --save
+
 
 //import {CircularProgress, AnimatedCircularProgress } from 'react-native-circular-progress';
 // npm i --save react-native-circular-progress react-native-svg
@@ -34,7 +36,7 @@ constructor(props) {
     rewards:[],
     reward_title:"",
     reward_points:500,
-    scoreT:0,
+    scoreT:28,
   };
   
 
@@ -125,7 +127,7 @@ constructor(props) {
   }
 
   renderRewards=(rewards)=> {
-    const fill = this.state.score;
+    const percent = this.state.score;
    // const prefill = this.state.score
   //  const Max_Points = this.state.rewards;
 
@@ -138,39 +140,43 @@ constructor(props) {
         //alert(this.state.score);
      return(<View style={styles.taskCont} key={reward.id}>
      
-           <View style={styles.contTitle}>
-                <Text style={styles.rewardName}>
-                    {reward.reward_title}</Text>
-            </View>
-  
-
-      <Text style={styles.taskDesc}>    
-          {reward.reward_points} points
-          
-      </Text>
-
-     
-          
-           <View style={{
-            backgroundColor:'red',
+        <View style={{
+            //backgroundColor:'red', borderWidth:5,
+			borderColor:"#49CBC6",
+			borderWidth:5,
+			borderRadius:5,
+			padding:10,
+			margin:5,
+			alignItems:'center',
+			width:'90%',
+			height:'90%',
+			
                    }}>
-          <ProgressCircle
-                    percent={90}
+                <Text style={styles.rewardTitle}>
+                    {reward.reward_title}
+				</Text>
+				<Text style={styles.rewardTitle}>    
+			  		Worth {reward.reward_points} points
+		 		</Text>
+		 
+          <PercentageCircle
+                    percent={pr}
                     radius={50}
                     borderWidth={8}
                     color="#49CBC6"
                     //shadowColor="#3399FF"
                     //bgColor="#fff"
                     ref={(ref) => this.circularProgress = ref}
+			   		style={{marginBottom:10,}}
         >       
               {
                   (percent) => (
-                      <View style={styles.points}>
-                            {reward.scoreT}
+                      <View style={styles.rewardPoints}>
+                            {this.prop.reward_points}
                       </View>
                     )
                   }
-        </ProgressCircle>
+        </PercentageCircle>
           </View>
      
     </View>)
@@ -189,35 +195,22 @@ const fill = this.state.points / Max_Points * 50;
               
             <View style={styles.containerTop}>
          
-          
           <Text style={styles.title}>Rewards</Text>
         </View>
+            <ScrollView>
           
         <View style={styles.middleContainer}>
                         
-            <ScrollView>
                 
-              <View style={styles.rewardsCon}>
                 {this.renderRewards(this.state.rewards)} 
                   
-                  <ProgressCircle
-                    percent={90}
-                    radius={50}
-                    borderWidth={8}
-                    color="#49CBC6"
-                    shadowColor="#FFF"
-                    //bgColor="#fff"
-                  >
-                    
-                  </ProgressCircle>
                
                   
-              </View>     
-            </ScrollView>
               
                     
 
       </View>
+            </ScrollView>
           
             <Nav/>
         </LinearGradient>
@@ -227,10 +220,8 @@ const fill = this.state.points / Max_Points * 50;
 }
 
 const styles = StyleSheet.create({
-    container: {
+ container: {
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
     width: '100%',
     },
     
@@ -241,72 +232,10 @@ const styles = StyleSheet.create({
     top: 0,
     width:412,
     height:100,
+	zIndex:5,
   },
-    
-  middleContainer: {
-    marginTop:20,
-    padding:10,
-    height:'70%',
-      
-  },
-taskDesc: {
-    fontSize: 16,
-    textAlign: 'right',
-    marginRight: 10,
-    //fontFamily: 'Raleway-Regular',
-    //fontFamily: 'NunitoSans-Regular',
-    zIndex:20,
-  },
-  touch: {
-    width: 100,
-    height: 100,
-    zIndex: 15,
-    bottom: 0,
-    marginBottom: 0,
-  },
-
-  reward: {
-     width: 70, 
-     height: 70, 
-     borderRadius: 5, 
-     borderColor: '#FFF',
-     position:'absolute',
-    },
-   
-   textBut: {
-    fontSize: 25,
-    color: '#49CBC6',
-    },
-    
- points: {
-    backgroundColor: 'transparent',
-    position: 'absolute',
-    width: 90,
-    height:38,    
-    textAlign: 'center',
-    color: '#49CBC6',
-    fontSize: 30,
-    fontWeight: "500"
-  },
-
-   touchPic: {
-    right: 40,
-    top: 30,
-    elevation: 2, // Android
-    },
-    
- rewardsCon: {
-    backgroundColor:'yellow',
-    position:'relative',
-    top:90,
-    flexDirection:'row',
-    flexWrap:'wrap',
-    height: 700,
-    width:400,
-    
-  },
-    
-    title: {
+	
+title: {
     color: 'white',
     top:'30%',
     fontSize: 30,
@@ -314,6 +243,64 @@ taskDesc: {
     //fontFamily: 'Raleway-Regular',
     //fontFamily: 'NunitoSans-Regular',
   }, 
+    
+middleContainer: {
+    //marginTop:20,
+    padding:10,
+	//backgroundColor:'yellow',
+    position:'relative',
+    top:115,
+	height: 600,
+    width:400,
+	flexWrap:'wrap',
+	flexDirection:'row',
+
+	//justifyContent: 'space-between',
+
+
+
+      
+  },
+taskCont:{
+	//backgroundColor:'red',
+	width:170,
+	height:200,
+	flexDirection:'row',
+	//flex:1,
+	//alignItems: 'stretch',
+	flexWrap:'wrap',
+	//flexDirection:'row',
+	marginHorizontal:10,
+	justifyContent: 'space-evenly',
+},
+   
+ rewardTitle:{
+	color: '#49CBC6',
+	textAlign:'center',
+	fontSize: 16,
+
+ },
+ rewardPoints: {
+    backgroundColor: 'green',
+    textAlign: 'center',
+    color: '#49CBC6',
+    fontSize: 10,
+  },
+    
+ rewardsCon: {
+    backgroundColor:'blue',
+    //position:'relative',
+    //top:90,
+	//flex:2,
+    //flexDirection:'row',
+	//justifyContent: 'space-evenly',
+	//height: 2000,
+    //width:400,
+    
+  },
+
+    
+  
     
 
 

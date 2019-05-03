@@ -8,10 +8,10 @@ import CReward from "./pages/CReward";
 import AllTasks from "./pages/AllTasks";
 import AllRewards from "./pages/AllRewards";
 import AddButt from "./pages/AddButt";
-import Createacc from "./pages/Createacc";
-import CreateG from "./pages/CreateG";
+import CAccount from "./pages/CAccount";
+import CGroup from "./pages/CGroup";
 import JoinG from "./pages/JoinG";
-import ChooseGroup from "./pages/ChooseGroup";
+import JorCGroup from "./pages/JorCGroup";
 
 import {connect} from "react-redux";
 import {ChangePage} from "../redux/actions";
@@ -56,20 +56,20 @@ import {ChangePage} from "../redux/actions";
                 curpage = <AllTasks />;
                 break; 
             
-          case 'Createacc':
-                curpage = <Createacc />;
+          case 'CAccount':
+                curpage = <CAccount />;
                 break; 
             
-          case 'CreateG':
-                curpage = <CreateG />;
+          case 'CGroup':
+                curpage = <CGroup />;
                 break; 
           
           case 'JoinG':
                 curpage = <JoinG />;
                 break; 
           
-          case 'ChooseGroup':
-                curpage = <ChooseGroup />;
+          case 'JorCGroup':
+                curpage = <JorCGroup />;
                 break;  
 				
 		 

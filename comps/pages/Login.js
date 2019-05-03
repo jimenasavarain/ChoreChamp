@@ -48,12 +48,12 @@ class Login extends React.Component {
     return (
       <LinearGradient colors={['#38385E', '#01061C']}
        style={{width: '100%', height:'100%', alignItems: 'center',}}>
-                <Image style={styles.imgUn}
-                      source={require('../Content/icons/Logo.png')}
+                <Image 
+					style={styles.imgUn}
+					resizeMode="contain"
+                    source={require('../Content/icons/Logo.png')}
                       /> 
             
-                
-               
                 <View style={styles.midLogin}>
                     <KeyboardAvoidingView 
                     style={styles.keyboardView} 
@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
     height: '70%',
     paddingHorizontal:'10%',
     position:'relative',
-    top:40,
+    top:15,
     zIndex: 2,
   },
  keyboardView:{
@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
  signCon:{
      //backgroundColor:'#CCC',
      position:'relative',
-     top:100,
+     top:80,
     },
   
  signInTitle:{

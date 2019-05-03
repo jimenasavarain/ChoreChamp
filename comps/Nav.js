@@ -21,7 +21,18 @@ import {ChangePage} from "../redux/actions";
         
     return (
       <View style={styles.container}>
-          <View style={styles.buttons}>
+			
+          <TouchableOpacity 
+                style={styles.topButts} 
+                onPress={this.handleButton.bind(this, 'profile')}>
+                <Image 
+                    style={[styles.profileIcon, styles.icons] }
+                    resizeMode="contain"
+                    source={require('./Content/icons/profile.png')}
+                      />  
+            </TouchableOpacity>
+			
+          <View style={styles.bottomButts}>
 
               
 {/*
@@ -32,7 +43,7 @@ import {ChangePage} from "../redux/actions";
                 onPress={this.handleButton.bind(this, 'Group')}>
                 <Image 
                     style={[styles.groupIcon, styles.icons] }
-                    resize="contain"
+                    resizeMode="contain"
                     source={require('./Content/icons/GroupIcon.png')}
                       />  
             </TouchableOpacity>
@@ -44,17 +55,17 @@ import {ChangePage} from "../redux/actions";
                   onPress={this.handleButton.bind(this, 'AllTasks')}>
                   <Image 
                       style={[styles.tasksIcon, styles.icons] }
-                      resize="contain"
+                      resizeMode="contain"
                       source={require('./Content/icons/task.png')}
                       />  
                </TouchableOpacity>
             {/*  <Button title="Profile" onPress={this.handleButton.bind(this, 'Profile')} />*/}
               <TouchableOpacity 
                   style={styles.touch} 
-                  onPress={this.handleButton.bind(this, 'Profile')}>
+                  onPress={this.handleButton.bind(this, 'AllRewards')}>
                   <Image 
                       style={[styles.profileIcon, styles.icons] }
-                      resize="contain"
+                      resizeMode="contain"
                       source={require('./Content/icons/rewardNav.png')}
                       />  
               </TouchableOpacity>
@@ -65,7 +76,7 @@ import {ChangePage} from "../redux/actions";
             <TouchableOpacity style={styles.touch} onPress={this.handleButton.bind(this, 'AddButt')}>
                 <Image 
                   style={[styles.addButt, styles.icons]}
-                  resize="contain"
+                  resizeMode="contain"
                   source={require('./Content/icons/addButt.png')}
                       />  
             </TouchableOpacity>
@@ -77,17 +88,33 @@ import {ChangePage} from "../redux/actions";
 
 const styles = StyleSheet.create({
   container: {
-      position: 'absolute',
-      bottom:0,
-      width:'90%',
+      width:'100%',
+      height:'100%',
+	  //backgroundColor:'blue',
+	  zIndex:99,
+	  position:'absolute',
       
    
   },
-buttons: {
+topButts: {
+    flexDirection:'row',
+    //backgroundColor:'red',
+	padding:15,
+	width:'100%',
+	position: 'absolute',
+    top:20,
+	
+    
+  },
+bottomButts: {
     flexDirection:'row',
     justifyContent: 'space-between',
     //backgroundColor:'red',
     padding:15,
+	width:'100%',
+	position: 'absolute',
+    bottom:0,
+	
     
   },
 

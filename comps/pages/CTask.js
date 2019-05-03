@@ -177,6 +177,14 @@ const styles = StyleSheet.create({
   },
 
 //Main Header of the page    
+
+  containerTop: {
+    marginTop:0,
+    backgroundColor: '#49CBC6',
+    top: 0,
+    width:412,
+    height:100,
+  },
 title: {
     color: 'white',
     top:'30%',
@@ -185,13 +193,6 @@ title: {
     //fontFamily: 'Raleway-Regular',
     //fontFamily: 'NunitoSans-Regular',
   }, 
-  containerTop: {
-    marginTop:0,
-    backgroundColor: '#49CBC6',
-    top: 0,
-    width:412,
-    height:100,
-  },
     
   keyboardView: {
     position:'absolute',
