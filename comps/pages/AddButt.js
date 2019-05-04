@@ -6,6 +6,8 @@ import {ChangePage, ChangeUserId} from '../../redux/actions';
 import { Asset, Font, LinearGradient } from "expo";
 //import url('https://fonts.googleapis.com/css?family=Nunito:200');
 
+import Nav from '../Nav'
+
 class AddButt extends React.Component {
     
  
@@ -41,9 +43,13 @@ class AddButt extends React.Component {
                             style={styles.button}>
                             <Text style={styles.textlogin}>Create New Reward</Text> 
                         </TouchableOpacity>
+                        
+                
                         </View>
                     </KeyboardAvoidingView>
                 </View>
+                <Nav/>
+
       
       </LinearGradient>
       

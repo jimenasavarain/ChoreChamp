@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { StyleSheet, Text, View, Button, TouchableOpacity, Image } from 'react-native';
 import Login from "./pages/Login";
@@ -20,17 +21,21 @@ import {ChangePage} from "../redux/actions";
         
         
     return (
+        
+
       <View style={styles.container}>
 			
-          <TouchableOpacity 
+                  <View style={styles.topcontProfile}>
+        <TouchableOpacity 
                 style={styles.topButts} 
-                onPress={this.handleButton.bind(this, 'profile')}>
+                onPress={this.handleButton.bind(this, 'Profile')}>
                 <Image 
                     style={[styles.profileIcon, styles.icons] }
                     resizeMode="contain"
                     source={require('./Content/icons/profile.png')}
                       />  
             </TouchableOpacity>
+        </View>
 			
           <View style={styles.bottomButts}>
 
@@ -87,15 +92,21 @@ import {ChangePage} from "../redux/actions";
 }
 
 const styles = StyleSheet.create({
+    topcontProfile: {
+      width:'100%',
+      left:10,
+      height:'10%',
+      position:'absolute',
+    },
+    
   container: {
       width:'100%',
       height:'100%',
 	  //backgroundColor:'blue',
-	  zIndex:99,
 	  position:'absolute',
-      
-   
+
   },
+    
 topButts: {
     flexDirection:'row',
     //backgroundColor:'red',
@@ -103,9 +114,9 @@ topButts: {
 	width:'100%',
 	position: 'absolute',
     top:20,
-	
-    
+	zIndex:10,
   },
+	
 bottomButts: {
     flexDirection:'row',
     justifyContent: 'space-between',
@@ -113,9 +124,8 @@ bottomButts: {
     padding:15,
 	width:'100%',
 	position: 'absolute',
+	zIndex:15,
     bottom:0,
-	
-    
   },
 
 icons:{

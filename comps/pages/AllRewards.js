@@ -150,6 +150,10 @@ constructor(props) {
 			alignItems:'center',
 			width:'90%',
 			height:'90%',
+            position:'absolute',
+            flexWrap:'wrap',
+	        flexDirection:'row',
+            alignItems: 'flex-start',
 			
                    }}>
                 <Text style={styles.rewardTitle}>
@@ -197,20 +201,21 @@ const fill = this.state.points / Max_Points * 50;
          
           <Text style={styles.title}>Rewards</Text>
         </View>
-            <ScrollView>
+        
           
         <View style={styles.middleContainer}>
                         
-                
-                {this.renderRewards(this.state.rewards)} 
-                  
-               
+                <ScrollView>
+                    <View style={styles.rewardsCon}>
+                {this.renderRewards(this.state.rewards)}
+                        </View>
+                </ScrollView>
                   
               
                     
 
       </View>
-            </ScrollView>
+
           
             <Nav/>
         </LinearGradient>
@@ -250,17 +255,18 @@ middleContainer: {
 	//backgroundColor:'yellow',
     position:'relative',
     top:115,
-	height: 600,
-    width:400,
+	height: '74%',
+    width:'100%',
 	flexWrap:'wrap',
 	flexDirection:'row',
+    alignItems: 'flex-start',
+
 
 	//justifyContent: 'space-between',
 
-
-
       
   },
+    
 taskCont:{
 	//backgroundColor:'red',
 	width:170,
@@ -271,7 +277,6 @@ taskCont:{
 	flexWrap:'wrap',
 	//flexDirection:'row',
 	marginHorizontal:10,
-	justifyContent: 'space-evenly',
 },
    
  rewardTitle:{
@@ -288,7 +293,11 @@ taskCont:{
   },
     
  rewardsCon: {
-    backgroundColor:'blue',
+      flexDirection:'row',
+    flexWrap:'wrap',
+    height: '100%',
+    width:400,
+    
     //position:'relative',
     //top:90,
 	//flex:2,

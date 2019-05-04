@@ -41,7 +41,7 @@ state={
   }
 
 // State to Open Modal
-    setModalVisible(visible,task) {
+setModalVisible=(visible,task)=>{
     this.setState({
       modalVisible: visible,
       curTask:task
@@ -52,7 +52,7 @@ state={
 componentWillMount=()=>{
     this.handleTasks();
     this.timer = setInterval(()=>{
-      this.handleTasks();
+      //this.handleTasks();
     },2000);
   }
 
@@ -113,6 +113,7 @@ handleVerify=async (id)=>{
         if (json === true) {
             
         } else {
+            
          }
   }
 
@@ -222,12 +223,7 @@ renderTasks=(tasks)=> {
           onRequestClose={() => {
             Alert.alert('Modal has been closed.');
                             }}>
-            <AlertTask task={this.state.curTask} close={()=>{
-              this.setState({
-                modalVisible:false
-              })}}
-              done={this.handleScore}
-              />
+            
                         
         </Modal>
      </View>
@@ -250,7 +246,7 @@ renderTasks=(tasks)=> {
                 </View>
 
                 <View style={styles.middleContainer}>
-                    <ScrollView style={{width:'100%',}}>
+                    <ScrollView style={{width:'100%', height:'80%'}}>
                         {this.renderTasks(this.state.tasks)}
                     </ScrollView>
                     
@@ -291,7 +287,7 @@ const styles = StyleSheet.create({
    middleContainer: {
     position:'absolute',
     top:'30%',
-    height:'70%',
+    height:'60%',
     width:'80%',
     alignItems:'center',
     //backgroundColor:'red',

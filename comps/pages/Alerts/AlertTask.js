@@ -98,7 +98,7 @@ import {ChangePage, ChangeUserId} from '../../../redux/actions';
                      {this.props.task.end_time.split(" ")[0]}
                      </Text>
                      
-                     <Text style={styles.starStyle}>
+                     <View style={styles.starStyle}>
                         <Rating
                           type="star"
                           ratingColor='#3498db'
@@ -109,7 +109,7 @@ import {ChangePage, ChangeUserId} from '../../../redux/actions';
                           imageSize={20}
                           style={{ paddingVertical: 10, }}
                         /> 
-                      </Text>
+                      </View>
                      
                    </View>
                     <TouchableOpacity 
