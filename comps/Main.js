@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
+import Landing from "./pages/Landing";
 import Login from "./pages/Login";
 import Group from "./pages/Group";
 import Profile from "./pages/Profile";
@@ -24,7 +25,7 @@ import {ChangePage} from "../redux/actions";
   
   
     render() {
-        var curpage = <Login />;
+        var curpage = <Landing />;
         
         //we are changing state to use the global state
         switch (this.props.page){

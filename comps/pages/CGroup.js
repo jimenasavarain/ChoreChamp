@@ -230,9 +230,9 @@ var allP = this.state.predictions.map((obj,index)=>{
                     >
             	</MapView>
 
-            <TouchableOpacity style={styles.createG}
+            <TouchableOpacity style={styles.pinButt}
             onPress={this.handleCreateG}>
-              <Text style={styles.textBut}>Create</Text>
+              <Text style={styles.cGroupText}>Create</Text>
             </TouchableOpacity>
           </View>
      	</ScrollView>
@@ -319,6 +319,11 @@ pinButt:{
     borderRadius: 6,
     alignItems: 'center',
 	marginTop: 10,
+},
+cGroupText:{
+    fontSize:25,
+    textAlign:'center',
+    color: 'white',
 },
    
 });

@@ -33,6 +33,7 @@ state={
     this.handleGroupName();
     this.handlePoints();
   }
+
     
     handleUsers=async ()=>{
     var fd= new FormData();
@@ -132,8 +133,16 @@ sortByScore=(a, b)=>{
         
         return (
             <View>
-                
-            <TouchableOpacity onPress={() => this.handleOnPress(index)}>
+                {/*
+            <TouchableOpacity onPress={() => this.handleOnPress(this.handleProfile)}>
+              <View style={styles.users}>
+                <Text style={styles.textLabel}>{(obj.score)? obj.score : 0}</Text>
+                  
+                <Text style={styles.textLabel}>{"  "}{obj.username}</Text>
+              </View>
+            </TouchableOpacity>
+			*/}
+				 <TouchableOpacity onPress={this.handleProfile}>
               <View style={styles.users}>
                 <Text style={styles.textLabel}>{(obj.score)? obj.score : 0}</Text>
                   
