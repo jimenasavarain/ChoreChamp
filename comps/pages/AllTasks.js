@@ -27,9 +27,13 @@ constructor(props) {
  handleProfile=()=>{
  this.props.dispatch(ChangePage('Profile'));
     
+  }; 
+/**
+handleVerifyImage=()=>{
+    
   };
-
-// Fetch Data For Created Tasks ***  
+**/
+// Fetch Data From Created Tasks ***  
 state={
     tasks:[],
     isChecked:[],
@@ -40,13 +44,7 @@ state={
     curTask:null
   }
 
-// State to Open Modal
-setModalVisible=(visible,task)=>{
-    this.setState({
-      modalVisible: visible,
-      curTask:task
-    });
-  }
+
 
 // When Page Will Load
 componentWillMount=()=>{
@@ -102,7 +100,6 @@ handleTasks=async ()=>{
 handleVerify=async (id)=>{
     var fd= new FormData();
         fd.append("task_id", id);
-      
         var resp=await fetch("https://alarmaproj2.herokuapp.com/taskDone.php", {
           method:"POST",
           body:fd
@@ -139,16 +136,25 @@ handleScore=async (id)=>{
          }
     }
 
+// State to Open Modal
+setModalVisible=(visible,task)=>{
+    this.setState({
+      modalVisible: visible,
+      curTask:task
+    });
+  }
+
 // Grabbing and Displaying Tasks + Applying Verification & Score Functions
-renderTasks=(tasks)=> {
+renderTasks=(tasks,curTask)=> {
     
     var tasks = tasks || [];
-  console.log(tasks);
+	console.log(tasks);
    return tasks.map((task,index) =>
                     
      <View
+		 key={task}
          style={styles.allTasks}
-         key={task.task_id}>
+		 >
                         
     <CheckBox
           style={{position: 'relative', left:0, top:10,  alignItems: 'flex-start'}}
@@ -170,8 +176,8 @@ renderTasks=(tasks)=> {
           rightText={this.state.task_title}
       />                          
 
-        <TouchableOpacity 
-            style={{
+      <TouchableOpacity 
+          style={{
                     alignItems: 'flex-start', 
                     width:'90%', 
                     position:'relative', 
@@ -181,6 +187,7 @@ renderTasks=(tasks)=> {
             onPress={() => {
                 this.setModalVisible(true, task);
                 }
+			
             }>
            <View >
             <Text style={styles.taskTitle}>{task.task_title}</Text>
@@ -196,35 +203,81 @@ renderTasks=(tasks)=> {
                    style={{ paddingVertical: 10, }}
                 /> 
             </View>
-            <Text style={styles.taskDetails}>{task.task_description}</Text>  
+			   {/*<Text style={styles.taskDetails}>{task.task_description}</Text>  */}
             <Text style={styles.taskDetails}>due on: {task.end_time.split(" ")[0]}</Text>
-        
-                        
-    
-               
-      </View>
+      	  </View>
             
       </TouchableOpacity>
-                        <View style={styles.verifyCon}>
-      {(this.props.admin === 2) ?
-            <TouchableOpacity 
-                  onPress={this.handleVerify.bind(this,task.task_id)}>
-                  <Text style={styles.verifyButt}>Verify Task</Text>
-            </TouchableOpacity> : null}
-    
-        
-      
+		
+      <View style={styles.verifyCon}>
+			{(this.props.admin === 2) ?
+			<TouchableOpacity 
+				onPress={this.handleVerify.bind(this,task.task_id)}>
+				<Text style={styles.verifyButt}>Verify Task</Text>
+			</TouchableOpacity> : null}
       </View>
+	
       <View>                 
-        <Modal
-          animationType="none"
-          transparent={true}
-          visible={this.state.modalVisible}
-          onRequestClose={() => {
-            Alert.alert('Modal has been closed.');
-                            }}>
-            
-                        
+      <Modal
+		 	animationType="slide"
+			transparent={true}
+			visible={this.state.modalVisible}
+			onRequestClose={() => {
+				Alert.alert('Modal has been closed.');
+			
+            }}
+			>
+			<View 						  
+				style={styles.modalContainer}
+				>
+				<View style={styles.indTask}>
+					<View
+						style={styles.topIndTaskContainer}>
+						<Text 
+						style={styles.taskTitle}
+						>
+						{(this.state.curTask) ? this.state.curTask.task_title : null}
+						</Text>
+						<Rating
+							type="star"
+							ratingColor='#3498db'
+							ratingBackgroundColor='#c8c7c8'
+							ratingCount={5}
+							startingValue={parseInt((this.state.curTask) ? this.state.curTask.score : null)}
+							readonly= {true}
+							imageSize={20}
+							style={{ paddingVertical: 10, }}
+						/> 
+					</View>
+					<Text 
+						style={styles.taskDetails}> Description:
+						{(this.state.curTask) ? this.state.curTask.task_description : null}
+					</Text>  
+					<Text 
+						style={styles.taskDetails}>
+						due on: {(this.state.curTask) ? this.state.curTask.end_time.split(" ")[0] : null}
+					</Text>
+
+
+					<TouchableOpacity 
+						onPress={() => {
+							this.setModalVisible(!this.state.modalVisible);
+						}}> 
+						<Text style={styles.verifyButt}>
+							Hide
+						</Text>
+					</TouchableOpacity>
+				{/*	
+					<View style={styles.imgCon}>
+      					{(this.props.admin === 2) ?
+						<TouchableOpacity 
+							  onPress={handleVerifyImage}>
+							  <Text style={styles.verifyButt}>IMAGE</Text>
+						</TouchableOpacity> : null}
+      				</View>
+	  			*/}
+            	</View>
+            </View>
         </Modal>
      </View>
     </View>
@@ -247,7 +300,10 @@ renderTasks=(tasks)=> {
 
                 <View style={styles.middleContainer}>
                     <ScrollView style={{width:'100%', height:'80%'}}>
+						
+						
                         {this.renderTasks(this.state.tasks)}
+						
                     </ScrollView>
                     
                 </View>
@@ -284,7 +340,7 @@ const styles = StyleSheet.create({
     
    
     
-   middleContainer: {
+middleContainer: {
     position:'absolute',
     top:'30%',
     height:'60%',
@@ -293,8 +349,8 @@ const styles = StyleSheet.create({
     //backgroundColor:'red',
    
   },
-allTasks: {
-    
+	
+allTasks: {  
    borderWidth: 2,
    borderColor: '#49CBC6',
    backgroundColor:'#FFF',
@@ -302,36 +358,62 @@ allTasks: {
    width:'100%',
    marginBottom:'5%',
 
-
-
 },
-    taskTitle:{
-     fontSize:30,
-     color:'#49CBC6',
-    
+	
+taskTitle:{
+   fontSize:30,
+   color:'black',
 },
 
-    taskDetails:{
-     fontSize:25,
-     color:'grey',
-    },
+taskDetails:{
+   fontSize:25,
+   color:'grey',
+},
     
-    verifyButt:{
-     fontSize:25,
-     padding: 12,
-     textAlign:'center',
-     color: '#FFF',
-     backgroundColor:'#49CBC6',
-     borderWidth:2,
-     borderRadius: 5,
-     borderColor:'#49CBC6',
-     marginBottom:20,
+verifyButt:{
+   fontSize:25,
+   padding: 12,
+   textAlign:'center',
+   color: '#FFF',
+   backgroundColor:'#49CBC6',
+   borderWidth:2,
+   borderRadius: 5,
+   borderColor:'#49CBC6',
+   marginBottom:20,
+},
+verifyCon:{
+   alignItems:'center',
         
     },
-    verifyCon:{
-     alignItems:'center',
-        
-    },
+modalContainer:{
+	position:'absolute',
+	top:0,
+	bottom:0,
+	right:0,
+	left:0,
+	margin:'auto',
+	backgroundColor:'rgba( 0, 0, 0, 0.5)',
+	height:'100%',
+	
+},
+indTask:{
+	backgroundColor:'#FFF',
+	marginTop:160,
+	marginRight:40,
+	marginLeft:40,
+	padding:20,
+	borderWidth:2,
+	borderColor: '#49CBC6',
+	borderRadius:5,
+},
+	
+topIndTaskContainer:{
+	flexDirection:'row',
+	borderBottomWidth:5,
+	borderBottomColor:'#49CBC6',
+	justifyContent: 'space-between',
+}
+	
 });
 
 function mapStateToProps(state){

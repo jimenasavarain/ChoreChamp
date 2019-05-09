@@ -543,16 +543,15 @@ const styles = StyleSheet.create({
     color: '#49CBC6',
     zIndex:-100,
   },
-
-  map: {
+map: {
     width:280, 
     height:120,
     margin: 25,
     bottom:200,
     position:'absolute',
     borderRadius:10,
-  },
-    
+  }, 
+	
 locationContainer: {
     position:'relative',
     backgroundColor:'#FFF',  
@@ -564,6 +563,8 @@ locationContainer: {
     borderRadius: 5,
     
   },
+
+
     
 locationText: {
     fontSize: 15,
