@@ -146,14 +146,11 @@ constructor(props) {
 			borderWidth:5,
 			borderRadius:5,
 			padding:10,
-			margin:5,
 			alignItems:'center',
 			width:'90%',
-			height:'90%',
-            position:'absolute',
-            flexWrap:'wrap',
-	        flexDirection:'row',
-            alignItems: 'flex-start',
+			height:200,
+            //position:'absolute',
+	        flexDirection:'column',
 			
                    }}>
                 <Text style={styles.rewardTitle}>
@@ -272,11 +269,10 @@ taskCont:{
 	width:170,
 	height:200,
 	flexDirection:'row',
+	marginBottom:10,
 	//flex:1,
 	//alignItems: 'stretch',
-	flexWrap:'wrap',
 	//flexDirection:'row',
-	marginHorizontal:10,
 },
    
  rewardTitle:{
@@ -293,11 +289,11 @@ taskCont:{
   },
     
  rewardsCon: {
-      flexDirection:'row',
+    flexDirection:'row',
     flexWrap:'wrap',
     height: '100%',
     width:400,
-    
+	justifyContent: 'center',
     //position:'relative',
     //top:90,
 	//flex:2,
