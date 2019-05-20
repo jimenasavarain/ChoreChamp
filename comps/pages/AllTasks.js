@@ -47,15 +47,14 @@ state={
 
 
 // When Page Will Load
-componentWillMount=()=>{
-    this.handleTasks();
+componentDidMount=()=>{
+    //this.handleTasks();
     this.timer = setInterval(()=>{
-      //this.handleTasks();
+      this.handleTasks();
     },2000);
   }
 
-// When Leaving Page Clear Timer
-componentWillUnmount=()=>{
+  componentWillUnmount=()=>{
     clearInterval(this.timer);
   }
 
@@ -86,7 +85,7 @@ handleTasks=async ()=>{
     
       var json=await resp.json();
       console.log(json);
-      if (json.length > 0) {
+      if (json.length >= 0) {
         this.setState({
           tasks:json
       
