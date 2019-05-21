@@ -45,9 +45,9 @@ class Group extends React.Component {
         })
         
          let { status } = await Permissions.askAsync(Permissions.LOCATION);
-    if (status !== 'granted') {
-      this.setState({
-        errorMessage: 'Permission to access location was denied',
+    	 if (status !== 'granted') {
+      		this.setState({
+        		errorMessage: 'Permission to access location was denied',
       });
     }
       let location = await Location.getCurrentPositionAsync({});
@@ -189,6 +189,7 @@ handleUsers=async ()=>{
     console.log(score);*/
   };
 
+//Indivisual Memembers Location Map
 
     handleGroupName=async ()=>{
     var fd= new FormData();
@@ -371,31 +372,145 @@ renderIndUser=(userid,curUser)=> {
     
     render() {
 	   
-        return ( 
-                    
-      <View style={styles.container}>
-                 <LinearGradient   colors={['#01061C', '#38385E']}
-          style={{width:420, height:'100%', alignItems: 'center'}}>
-             
-            <View style={styles.containerTop}>
-               
-                {/*-- Back button +  Name of the Group + Icon */}
-                <Text style={styles.title}>{this.state.gName}</Text>
-                   </View>
-
+     return ( 
+      <View 
+		  style={styles.container}>
+          <LinearGradient   
+			 colors={['#01061C', '#38385E']}
+             style={{width:420, height:'100%', alignItems: 'center'}}>
             <View 
+				style={styles.containerTop}>
+                <Text 
+				   style={styles.title}>{this.state.gName}</Text>
+            </View>
+            <View 
+				style={styles.famCon}>
+                 <Text 
+			 	    style={styles.famLabel}> 
+					 Family
+				 </Text>
+				 <Text 
+					 style={styles.createdByLabel}> 
+					 Created by Roxy
+				 </Text>
+				
+            </View>
+			<View 
+				style={styles.famMemCon}>
+				<View 
+				style={styles.indFamMemCon}>
+				<View style={styles.circle} />
+                 <Text 
+					 style={styles.createdByLabel}> 
+					 Family
+				</Text>
+				</View>
+				<View 
+				style={styles.indFamMemCon}>
+				<View style={styles.circle} />
+                 <Text 
+					 style={styles.createdByLabel}> 
+					 Family
+				</Text>
+				</View>
+				<View 
+				style={styles.indFamMemCon}>
+				<View style={styles.circle} />
+                 <Text 
+					 style={styles.createdByLabel}> 
+					 Family
+				</Text>
+				</View>
+				<View 
+				style={styles.indFamMemCon}>
+				<View style={styles.circle} />
+                 <Text 
+					 style={styles.createdByLabel}> 
+					 Family
+				</Text>
+				</View>
+				
+				
+				  {this.renderIndUser(this.state.userid)}
+				
+            </View>
+			<View style={styles.groupCircle} />
+			
+			<Image 
+				source={(this.state.image) ? {uri:this.state.image} : require('../Content/icons/takepic.png')}
+				style={styles.cameraIcon}
+				resizeMode="contain"
+              			/>
+
+			<View 
 				style={styles.middleContainer}>
                  <Text 
 					 style={styles.textLabel}> 
 					 Scoreboard 
 				</Text>
 				
+				<View style={styles.scoreBoardIcon}>
+					<View style={styles.first}>
+						<Image 
+							source={(this.state.image) ? {uri:this.state.image} : require('../Content/icons/firstPlace.png')}
+							style={styles.placeIcons}
+							resizeMode="contain"
+							/>
+						<Text style={{position:'absolute', bottom:0, textAlign:'center', color:'white'}}> Name </Text>
+					</View>
+					<View style={styles.secondNthird}>
+						<View style={styles.sndNthrd}>
+							<Image 
+								source={(this.state.image) ? {uri:this.state.image} : require('../Content/icons/secondPlace.png')}
+								style={styles.placeIcons}
+								resizeMode="contain"
+								/>
+							<Text style={styles.secNthirdNames}> Name 2</Text>
+						</View>
+							<View style={styles.sndNthrd}>
+								<Image 
+									source={(this.state.image) ? {uri:this.state.image} : require('../Content/icons/thirdPlace.png')}
+									style={styles.placeIcons}
+									resizeMode="contain"
+									/>
+								<Text style={styles.secNthirdNames}> Name 3</Text>
+							</View>
+
+						</View>
+				</View>
+				
 				  {this.renderIndUser(this.state.userid)}
+				<View 
+					style={styles.scoreFamCon}>
+					<Text 
+						 style={styles.scoreboardList}> 
+						 4. Jimena
+						 5. Ramin
+					</Text>
+            	</View>
+				<Text 
+					style={styles.curLocationLabel}> 
+					Current Location of Members
+				</Text>
+					
+				<MapView
+					style={styles.groupMap}
+					initialRegion={this.state.initialPosition}
+					region={this.state.initialPosition}>
+            
+			     <MapView.Marker
+					 coordinate={this.state.initialPosition}
+					 title={"Home"}
+					 description={this.state.address}
+				 />
+           
+           </MapView>
 				
             </View>
+			
           </LinearGradient>
 				
-				            <Nav/>
+				<Nav/>
 
       </View>
      
@@ -414,26 +529,31 @@ const styles = StyleSheet.create({
     
 containerTop: {
     marginTop:0,
-    backgroundColor: '#49CBC6',
     top: 0,
-    width:412,
+    width:352,
     height:100,
- },
+	borderBottomWidth:2,
+	borderBottomColor:'#337373',
+	marginHorizontal:10,
+  },
     
 title: {
     color: 'white',
     top:'30%',
     fontSize: 30,
-    textAlign: 'center',
+    textAlign: 'right',
     //fontFamily: 'Raleway-Regular',
     //fontFamily: 'NunitoSans-Regular',
   }, 
   
  middleContainer: {
-    marginTop:20,
-    padding:10,
-    height:'70%',
-    width:'100%',
+	position:'absolute',
+	top:250,
+    paddingBottom:10,
+    paddingTop:5,
+    height:'53%',
+    width:'85%',
+	//backgroundColor:'pink',
   },
 	
 allUsers: {  
@@ -446,13 +566,146 @@ allUsers: {
 },
 	
 textLabel: {
-    color: '#49CBC6',
+    color: '#FF8357',
     fontSize: 20,
+    textAlign: 'center',
+    justifyContent: 'flex-start',
+  },
+	
+famCon:{
+	position:'absolute',
+    top: 100,
+	right:25,
+    width:252,
+	//backgroundColor:'red',
+	borderBottomWidth:2,
+	borderBottomColor:'#337373',
+	marginHorizontal:10,
+},
+scoreFamCon:{
+	position:'absolute',
+    top: 160,
+	right:25,
+    width:302,
+    height:50,
+	//backgroundColor:'yellow',
+	borderBottomWidth:2,
+	borderTopWidth:2,
+	borderBottomColor:'#337373',
+	borderTopColor:'#337373',
+},	
+famMemCon:{
+	position:'absolute',
+    top: 180,
+	right:25,
+    width:252,
+	//backgroundColor:'red',
+	borderBottomWidth:2,
+	borderBottomColor:'#337373',
+	marginHorizontal:10,
+	flexDirection:'row',
+	justifyContent:'space-between'
+},	
+indFamMemCon:{
+	//backgroundColor:'green',
+	alignItems:'center',
+	flexDirection:'column',
+	//marginRight:7,
+	
+},	
+	
+circle: {
+    width: 50,
+    height: 50,
+    borderRadius: 100/2,
+    backgroundColor: '#337373'
+},
+groupCircle: {
+    width: 95,
+    height: 95,
+	position:'absolute',
+	top:110,
+	left:20,
+    borderRadius: 100/2,
+    backgroundColor: '#89D5C9'
+},
+cameraIcon:{
+	width:30,	
+	height:30,
+	position:'absolute',
+	top:200,
+	left: 85
+},
+scoreBoardIcon: {
+    width: '100%',
+    height: 130,
+    //backgroundColor: 'yellow',
+	justifyContent: 'space-between',
+},
+placeIcons: {
+    width: 120,
+    height: 120,
+	marginLeft:20,
+	marginRight:20,
+	marginBottom:0,
+	marginTop:-20,
+},
+secNthirdNames:{
+	color:'white',
+	fontSize:15,
+	textAlign:'center',
+	position:'relative',
+	marginTop:-25,
+
+},
+first:{
+	justifyContent: 'center',
+	//backgroundColor:'blue',
+	alignItems:'center',
+
+},
+	
+secondNthird:{
+	flexDirection:'row',
+	justifyContent: 'center',
+	position:'relative',
+	bottom:75,
+
+},
+sndNthrd:{
+	flexDirection:'column',
+	justifyContent: 'center',
+
+},
+	
+famLabel: {
+    color: '#89D5C9',
+    fontSize: 30,
+    textAlign: 'right',
+   
+},
+	
+curLocationLabel: {
+    color: '#89D5C9',
+	position:'relative',
+	top:50,
+    fontSize: 15,
+    textAlign: 'center',
+  },
+	
+createdByLabel: {
+    color: '#FFF',
+    fontSize: 15,
+    textAlign: 'right',
+    justifyContent: 'flex-start',
+  },
+scoreboardList: {
+    color: '#FFF',
+    fontSize: 15,
     textAlign: 'left',
     justifyContent: 'flex-start',
-    //fontFamily: 'Raleway-Regular',
-   // fontFamily: 'NunitoSans-Regular',
   },
+	
 uNsText:{
 	color: '#49CBC6',
 	fontSize: 20,
@@ -546,7 +799,6 @@ mapAndLocationCon:{
     width:140, 
     height:120,
     borderRadius:10,
-	margin:10,
   },
 	
 locationContainer: {
@@ -580,7 +832,14 @@ hideButtText:{
     padding: 10,
     textAlign:'center',
     color: 'white',
-	
+},
+
+	groupMap:{
+	width:355, 
+    height:120,
+    bottom:0,
+    position:'absolute',
+    borderRadius:10,
 },
 	
 });
