@@ -182,6 +182,9 @@ renderTasks=(tasks,curTask)=> {
                     position:'relative', 
                     left:30,
                     bottom:20,
+					//backgroundColor:'red',
+					paddingRight:10,
+					paddingLeft:10,
                             }}
             onPress={() => {
                 this.setModalVisible(true, task);
@@ -189,18 +192,21 @@ renderTasks=(tasks,curTask)=> {
 			
             }>
            <View >
-            <Text style={styles.taskTitle}>{task.task_title}</Text>
-            <View>
-                <Rating
-                   type="star"
-                   ratingColor='#3498db'
-                   ratingBackgroundColor='#c8c7c8'
-                   ratingCount={5}
-                   startingValue={parseInt(task.score)}
-                   readonly= {true}
-                   imageSize={20}
-                   style={{ paddingVertical: 10, }}
-                /> 
+			   <View
+				style={styles.topIndTask}>
+				<Text style={styles.taskTitle}>{task.task_title}</Text>
+				<View>
+					<Rating
+					   type="star"
+					   ratingColor='#3498db'
+					   ratingBackgroundColor='#c8c7c8'
+					   ratingCount={5}
+					   startingValue={parseInt(task.score)}
+					   readonly= {true}
+					   imageSize={20}
+					   style={{ paddingVertical: 10, }}
+					/> 
+				</View>
             </View>
 			   {/*<Text style={styles.taskDetails}>{task.task_description}</Text>  */}
             <Text style={styles.taskDetails}>due on: {task.end_time.split(" ")[0]}</Text>
@@ -208,13 +214,7 @@ renderTasks=(tasks,curTask)=> {
             
       </TouchableOpacity>
 		
-      <View style={styles.verifyCon}>
-			{(this.props.admin === 2) ?
-			<TouchableOpacity 
-				onPress={this.handleVerify.bind(this,task.task_id)}>
-				<Text style={styles.verifyButt}>Verify Task</Text>
-			</TouchableOpacity> : null}
-      </View>
+     
 	
       <View>                 
       <Modal
@@ -249,7 +249,7 @@ renderTasks=(tasks,curTask)=> {
 						/> 
 					</View>
 					<Text 
-						style={styles.taskDetails}> Description:
+						style={styles.taskDetails}>Description:
 						{(this.state.curTask) ? this.state.curTask.task_description : null}
 					</Text>  
 					<Text 
@@ -257,15 +257,25 @@ renderTasks=(tasks,curTask)=> {
 						due on: {(this.state.curTask) ? this.state.curTask.end_time.split(" ")[0] : null}
 					</Text>
 
+					<View style={styles.buttonCon}>
+						<TouchableOpacity 
+							onPress={() => {
+								this.setModalVisible(!this.state.modalVisible);
+							}}> 
+							<Text style={styles.verifyButt}>
+								Hide
+							</Text>
 
-					<TouchableOpacity 
-						onPress={() => {
-							this.setModalVisible(!this.state.modalVisible);
-						}}> 
-						<Text style={styles.verifyButt}>
-							Hide
-						</Text>
-					</TouchableOpacity>
+						</TouchableOpacity>
+						
+						<View>
+							{(this.props.admin === 2) ?
+							<TouchableOpacity 
+								onPress={this.handleVerify.bind(this,task.task_id)}>
+								<Text style={styles.verifyButt}>Verify Task</Text>
+							</TouchableOpacity> : null}
+						</View>
+					</View>
 				{/*	
 					<View style={styles.imgCon}>
       					{(this.props.admin === 2) ?
@@ -322,17 +332,18 @@ const styles = StyleSheet.create({
   },
     containerTop: {
     marginTop:0,
-    backgroundColor: '#49CBC6',
-    position:'absolute',
     top: 0,
-    width:412,
+    width:352,
     height:100,
+	borderBottomWidth:2,
+	borderBottomColor:'#337373',
+	marginHorizontal:10,
   },
     title: {
     color: 'white',
     top:'30%',
     fontSize: 30,
-    textAlign: 'center',
+    textAlign: 'right',
     //fontFamily: 'Raleway-Regular',
     //fontFamily: 'NunitoSans-Regular',
   }, 
@@ -346,17 +357,17 @@ middleContainer: {
     width:'80%',
     alignItems:'center',
     //backgroundColor:'red',
-   
   },
 	
 allTasks: {  
    borderWidth: 2,
    borderColor: '#49CBC6',
    backgroundColor:'#FFF',
+   borderRadius:20,
    position:'relative',
    width:'100%',
    marginBottom:'5%',
-
+   padding:10,
 },
 	
 taskTitle:{
@@ -370,20 +381,26 @@ taskDetails:{
 },
     
 verifyButt:{
-   fontSize:25,
-   padding: 12,
+   fontSize:15,
+   padding: 2,
    textAlign:'center',
-   color: '#FFF',
-   backgroundColor:'#49CBC6',
-   borderWidth:2,
-   borderRadius: 5,
+   color: '#89D4C9',
+   backgroundColor:'white',
+   borderWidth: 1.5,
+   borderRadius: 50,
    borderColor:'#49CBC6',
-   marginBottom:20,
+   width: 100,
+   marginTop:15,
 },
-verifyCon:{
-   alignItems:'center',
-        
+	
+buttonCon:{
+	flexDirection:'row',
+	//alignItems:'flex-start',
+	//width:'100%',
+	justifyContent:'space-evenly',
+	//backgroundColor:'blue'
     },
+	
 modalContainer:{
 	position:'absolute',
 	top:0,
@@ -411,6 +428,12 @@ topIndTaskContainer:{
 	borderBottomWidth:5,
 	borderBottomColor:'#49CBC6',
 	justifyContent: 'space-between',
+},
+topIndTask:{
+	flexDirection:'row',
+	justifyContent: 'space-between',
+	width:'100%',
+	//backgroundColor:'blue'
 }
 	
 });

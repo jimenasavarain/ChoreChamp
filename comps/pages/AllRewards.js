@@ -229,19 +229,22 @@ const styles = StyleSheet.create({
     
  containerTop: {
     marginTop:0,
-    backgroundColor: '#49CBC6',
     position:'absolute',
     top: 0,
-    width:412,
+    width:352,
     height:100,
 	zIndex:5,
+	borderBottomWidth:2,
+	borderBottomColor:'#337373',
+	marginHorizontal:10,
   },
+
 	
 title: {
     color: 'white',
     top:'30%',
     fontSize: 30,
-    textAlign: 'center',
+    textAlign: 'right',
     //fontFamily: 'Raleway-Regular',
     //fontFamily: 'NunitoSans-Regular',
   }, 

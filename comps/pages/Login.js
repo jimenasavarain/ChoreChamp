@@ -152,9 +152,9 @@ const styles = StyleSheet.create({
   loginbut:{
     alignItems: 'center',
     width:300,
-    borderRadius: 7,
-    backgroundColor: '#49CBC6',
     marginTop:15,
+	 borderRadius: 50,
+    backgroundColor: '#8AD0C5',
 
   },
   
