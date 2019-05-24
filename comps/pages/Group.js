@@ -251,20 +251,29 @@ renderIndUser=(userid,curUser)=> {
 		  <TouchableOpacity 
 			  style={{
 			    alignItems: 'flex-start', 
+				  
                      }}
 			    onPress={() => {
                 	 this.setModalVisible(true, user);
                 	}
 				}>
-				  <View style={styles.userNdscore}>
-					<Text style={styles.uNsText}>
-						{(user.score)? user.score : 0}
-					</Text>
-
-					<Text style={styles.uNsText}>
-						{"  "}{user.username}
-					</Text>
+			  <View 
+				style={styles.indFamMemCon}>
+				<View style={styles.circle} />
+				  	<View style={styles.userNdscore}>
+						<Text 
+							 style={styles.indFamMemberLabel}> 
+								{user.username}{"  "}
+						</Text>
+						<Text 
+							 style={styles.indFamMemberLabel}> 
+							 {(user.score)? user.score : 0}
+						</Text>
 				  </View>
+				  
+				</View>
+			  
+				 
            </TouchableOpacity>
           
 		  
@@ -381,13 +390,13 @@ renderIndUser=(userid,curUser)=> {
             <View 
 				style={styles.containerTop}>
                 <Text 
-				   style={styles.title}>{this.state.gName}</Text>
+				   style={styles.title}>Group</Text>
             </View>
             <View 
 				style={styles.famCon}>
                  <Text 
 			 	    style={styles.famLabel}> 
-					 Family
+					 {this.state.gName}
 				 </Text>
 				 <Text 
 					 style={styles.createdByLabel}> 
@@ -397,42 +406,7 @@ renderIndUser=(userid,curUser)=> {
             </View>
 			<View 
 				style={styles.famMemCon}>
-				<View 
-				style={styles.indFamMemCon}>
-				<View style={styles.circle} />
-                 <Text 
-					 style={styles.createdByLabel}> 
-					 Family
-				</Text>
-				</View>
-				<View 
-				style={styles.indFamMemCon}>
-				<View style={styles.circle} />
-                 <Text 
-					 style={styles.createdByLabel}> 
-					 Family
-				</Text>
-				</View>
-				<View 
-				style={styles.indFamMemCon}>
-				<View style={styles.circle} />
-                 <Text 
-					 style={styles.createdByLabel}> 
-					 Family
-				</Text>
-				</View>
-				<View 
-				style={styles.indFamMemCon}>
-				<View style={styles.circle} />
-                 <Text 
-					 style={styles.createdByLabel}> 
-					 Family
-				</Text>
-				</View>
-				
-				
 				  {this.renderIndUser(this.state.userid)}
-				
             </View>
 			<View style={styles.groupCircle} />
 			
@@ -479,7 +453,6 @@ renderIndUser=(userid,curUser)=> {
 						</View>
 				</View>
 				
-				  {this.renderIndUser(this.state.userid)}
 				<View 
 					style={styles.scoreFamCon}>
 					<Text 
@@ -557,12 +530,12 @@ title: {
   },
 	
 allUsers: {  
-   position:'relative',
-   width:'100%',
-   padding:10,
+   //position:'relative',
+   width:'25%',
+  // height:'50%',
+   //padding:10,
    //backgroundColor:'rgba( 255, 255, 255, 0.5)',
-   marginTop:10,
-
+   //marginTop:10,
 },
 	
 textLabel: {
@@ -599,7 +572,7 @@ famMemCon:{
     top: 180,
 	right:25,
     width:252,
-	//backgroundColor:'red',
+    height:75,
 	borderBottomWidth:2,
 	borderBottomColor:'#337373',
 	marginHorizontal:10,
@@ -607,7 +580,8 @@ famMemCon:{
 	justifyContent:'space-between'
 },	
 indFamMemCon:{
-	//backgroundColor:'green',
+	marginHorizontal:5,
+	width:'100%',
 	alignItems:'center',
 	flexDirection:'column',
 	//marginRight:7,
@@ -699,6 +673,11 @@ createdByLabel: {
     textAlign: 'right',
     justifyContent: 'flex-start',
   },
+indFamMemberLabel: {
+    color: '#FFF',
+    fontSize: 12,
+    textAlign: 'center',
+  },
 scoreboardList: {
     color: '#FFF',
     fontSize: 15,
@@ -718,6 +697,7 @@ groupname:{
 	
  userNdscore:{
     flexDirection: 'row',
+	 //backgroundColor:'red'
   },
 	
 modalContainer:{
