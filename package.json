@@ -33,7 +33,7 @@
     "react-timer-mixin": "^0.13.4",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
-    "yarn": "^1.15.2"
+    "yarn": "^1.22.0"
   },
   "devDependencies": {
     "@babel/core": "^7.4.3",
